@@ -11,12 +11,11 @@ import SnapKit
 class TodoTableViewCell: BaseTableViewCell {
     
     let checkButton = UIButton()
-    
     let labelStack = UIStackView()
     let titleLabel = UILabel()
     let memoLabel = UILabel()
     let dateLabel = UILabel()
-    
+  
     override func configureCellHierarchy() {
         let labels = [titleLabel, memoLabel, dateLabel]
         labels.forEach {
@@ -59,16 +58,7 @@ class TodoTableViewCell: BaseTableViewCell {
     }
     
     override func configureCellUI() {
-        // 임시 확인용
-//        checkButton.backgroundColor = .yellow
-//        labelStack.backgroundColor = .orange
-//        titleLabel.backgroundColor = .red
-//        memoLabel.backgroundColor = .blue
-//        dateLabel.backgroundColor = .green
-        
         checkButton.setImage(Resources.SystemImage.uncheck, for: .normal)
-        checkButton.setImage(Resources.SystemImage.check, for: .selected)
-        
         titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
         memoLabel.font = .systemFont(ofSize: 14, weight: .regular)
         dateLabel.textColor = .gray
@@ -79,5 +69,13 @@ class TodoTableViewCell: BaseTableViewCell {
         titleLabel.text = data.title
         memoLabel.text = data.memo
         dateLabel.text = data.regDate.formatted()
+    }
+    
+    func updateDoneButtonUI(isDone: Bool) {
+        if isDone {
+            checkButton.setImage(Resources.SystemImage.check, for: .normal)
+        } else {
+            checkButton.setImage(Resources.SystemImage.uncheck, for: .normal)
+        }
     }
 }

@@ -37,8 +37,7 @@ final class AllListViewController: BaseViewController {
     override func configureController() {
         setBarButtons()
         setSortPullDownButton()
-        
-        
+    
         allView.tableView.delegate = self
         allView.tableView.dataSource = self
         allView.tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.id)
@@ -51,10 +50,7 @@ final class AllListViewController: BaseViewController {
         present(addVC, animated: true)
     }
     
-    @objc private func sortButtonClicked() {
-        print("정렬 버튼 클릭")
-    }
-    
+    // dismiss 알림오면 테이블뷰 리로드
     @objc private func didDismissAddViewNotification(_ notification: Notification) {
         DispatchQueue.main.async {
             self.allView.tableView.reloadData()
@@ -66,11 +62,11 @@ final class AllListViewController: BaseViewController {
 extension AllListViewController {
     private func setBarButtons() {
         setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.add, color: nil, action: #selector(addButtonClicked))
-        setBarButton(type: .image, position: .right, title: nil, image: Resources.SystemImage.sort, color: nil, action: #selector(sortButtonClicked))
+        setBarButton(type: .image, position: .right, title: nil, image: Resources.SystemImage.sort, color: nil, action: nil)
     }
     
     private func setSortPullDownButton() {
-        let sortButton = navigationItem.rightBarButtonItem
+        guard let sortButton = navigationItem.rightBarButtonItem else { return }
         
         let sortedTitle = UIAction(title: "제목순", image: Resources.SystemImage.text) { _ in
             self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "title", ascending: true)
@@ -79,12 +75,10 @@ extension AllListViewController {
             self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "regDate", ascending: true)
         }
         let sortedPriority = UIAction(title: "우선순위 높은순", image: Resources.SystemImage.priority) { _ in
-            self.showAlert(style: .oneButton, title: "준비 중인 기능이에요!", message: nil) {
-                return
-            }
+            self.showAlert(style: .oneButton, title: "준비 중인 기능이에요!", message: nil) { return }
         }
         
-        sortButton?.menu = UIMenu(image: nil, identifier:  nil, options: .displayInline, children: [sortedTitle,sortedDate, sortedPriority])
+        sortButton.menu = UIMenu(image: nil, identifier:  nil, options: .displayInline, children: [sortedTitle,sortedDate, sortedPriority])
     }
     
     // AddViewController에서 dismiss 알림 받기
@@ -115,6 +109,20 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let todo = todoList[indexPath.row]
+        
+        let done = UIContextualAction(style: .normal, title: todo.isDone ? "미완료" : "완료") { action, view, completionHandler in
+            try! self.realm.write {
+                todo.isDone = !todo.isDone
+                print(todo.isDone ? "할 일 완료 처리" : "할 일 미완료 처리")
+                
+                if let cell = tableView.cellForRow(at: indexPath) as? TodoTableViewCell {
+                    cell.updateDoneButtonUI(isDone: todo.isDone)
+                }
+            }
+            completionHandler(true)
+            self.allView.tableView.reloadData()
+        }
+        
         let delete = UIContextualAction(style: .destructive, title: "삭제" ) { action, view, completionHandler in
             try! self.realm.write {
                 self.realm.delete(todo)
@@ -122,6 +130,6 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
             self.allView.tableView.reloadData()
         }
         
-        return UISwipeActionsConfiguration(actions: [delete])
+        return UISwipeActionsConfiguration(actions: [delete, done])
     }
 }

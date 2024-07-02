@@ -28,7 +28,7 @@ enum Resources {
     enum SystemImage {
         static let add = UIImage(systemName: "plus.circle.fill")
         static let sort = UIImage(systemName: "ellipsis.circle")
-        static let check = UIImage(systemName: "circle.fill")
+        static let check = UIImage(systemName: "checkmark.circle.fill")
         static let uncheck = UIImage(systemName: "circle")
         static let right = UIImage(systemName: "chevron.right")
         static let text = UIImage(systemName: "textformat")
