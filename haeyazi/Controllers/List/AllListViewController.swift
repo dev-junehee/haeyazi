@@ -13,7 +13,7 @@ final class AllListViewController: BaseViewController {
     private let allView = AllListView()
     
     let realm = try! Realm()
-    var todoList: Results<Todo>? {
+    var todoList: Results<Todo>! {
         didSet {
             allView.tableView.reloadData()
         }
@@ -101,23 +101,27 @@ extension AllListViewController {
 
 extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todoList?.count ?? 0
+        return todoList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.id, for: indexPath) as? TodoTableViewCell else { return TodoTableViewCell() }
 
-        guard let todoList = todoList else {
-            print("todoList 오류")
-            return cell
-        }
-        
         let todo = todoList[indexPath.row]
         cell.configureCellData(data: todo)
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let todo = todoList[indexPath.row]
+        let delete = UIContextualAction(style: .destructive, title: "삭제" ) { action, view, completionHandler in
+            try! self.realm.write {
+                self.realm.delete(todo)
+            }
+            self.allView.tableView.reloadData()
+        }
         
+        return UISwipeActionsConfiguration(actions: [delete])
     }
 }

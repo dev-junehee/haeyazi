@@ -13,6 +13,7 @@ class Todo: Object {
     @Persisted var title: String
     @Persisted var memo: String?
     @Persisted var regDate: Date
+    @Persisted var isDone: Bool
     
     convenience init(title: String, memo: String?, regDate: Date) {
         self.init()
@@ -20,6 +21,7 @@ class Todo: Object {
         self.title = title
         self.memo = memo
         self.regDate = regDate
+        self.isDone = false
     }
 }
  
