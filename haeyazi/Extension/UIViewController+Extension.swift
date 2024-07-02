@@ -24,7 +24,7 @@ enum AlertStyle {
 
 extension UIViewController {
     // BarButton
-    func setBarButton(type: BarButtonType, position: BarButtonPosition, title: String?, image: UIImage?, color: UIColor, action: Selector?) {
+    func setBarButton(type: BarButtonType, position: BarButtonPosition, title: String?, image: UIImage?, color: UIColor?, action: Selector?) {
         var barButton: UIBarButtonItem?
         
         switch type {
@@ -34,7 +34,7 @@ extension UIViewController {
             barButton = UIBarButtonItem(title: title, style: .plain, target: self, action: action)
         }
         
-        barButton?.tintColor = color
+        barButton?.tintColor = (color != nil) ? color : Resources.Color.primary
         
         switch position {
         case .left:

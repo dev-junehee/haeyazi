@@ -22,14 +22,14 @@ class AllListView: BaseView {
     
     override func configureViewLayout() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(8)
             $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(44)
         }
         
         tableView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-            $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
+            $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide).inset(24)
         }
     }
     

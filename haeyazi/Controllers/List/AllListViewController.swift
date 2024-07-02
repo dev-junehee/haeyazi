@@ -13,7 +13,11 @@ final class AllListViewController: BaseViewController {
     private let allView = AllListView()
     
     let realm = try! Realm()
-    var todoList: Results<Todo>?
+    var todoList: Results<Todo>? {
+        didSet {
+            allView.tableView.reloadData()
+        }
+    }
     
     override func loadView() {
         self.view = allView
@@ -31,7 +35,9 @@ final class AllListViewController: BaseViewController {
     }
     
     override func configureController() {
-        setBarButton(type: .image, position: .right, title: nil, image: Resources.SystemImage.add, color: Resources.Color.primary, action: #selector(addButtonClicked))
+        setBarButtons()
+        setSortPullDownButton()
+        
         
         allView.tableView.delegate = self
         allView.tableView.dataSource = self
@@ -45,6 +51,10 @@ final class AllListViewController: BaseViewController {
         present(addVC, animated: true)
     }
     
+    @objc private func sortButtonClicked() {
+        print("정렬 버튼 클릭")
+    }
+    
     @objc private func didDismissAddViewNotification(_ notification: Notification) {
         DispatchQueue.main.async {
             self.allView.tableView.reloadData()
@@ -52,7 +62,32 @@ final class AllListViewController: BaseViewController {
     }
 }
 
+
 extension AllListViewController {
+    private func setBarButtons() {
+        setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.add, color: nil, action: #selector(addButtonClicked))
+        setBarButton(type: .image, position: .right, title: nil, image: Resources.SystemImage.sort, color: nil, action: #selector(sortButtonClicked))
+    }
+    
+    private func setSortPullDownButton() {
+        let sortButton = navigationItem.rightBarButtonItem
+        
+        let sortedTitle = UIAction(title: "제목순", image: Resources.SystemImage.text) { _ in
+            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "title", ascending: true)
+        }
+        let sortedDate = UIAction(title: "마감일순", image: Resources.SystemImage.calendar) { _ in
+            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "regDate", ascending: true)
+        }
+        let sortedPriority = UIAction(title: "우선순위 높은순", image: Resources.SystemImage.priority) { _ in
+            self.showAlert(style: .oneButton, title: "준비 중인 기능이에요!", message: nil) {
+                return
+            }
+        }
+        
+        sortButton?.menu = UIMenu(image: nil, identifier:  nil, options: .displayInline, children: [sortedTitle,sortedDate, sortedPriority])
+    }
+    
+    // AddViewController에서 dismiss 알림 받기
     private func getNotification() {
         NotificationCenter.default.addObserver(
             self,
