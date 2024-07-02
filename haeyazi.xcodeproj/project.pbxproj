@@ -14,6 +14,8 @@
 		C468DFA82C33E2E00078004C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C468DFA72C33E2E00078004C /* .gitignore */; };
 		C468DFAD2C33E8E20078004C /* ReuseableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFAC2C33E8E20078004C /* ReuseableProtocol.swift */; };
 		C468DFB02C33E9AB0078004C /* AllListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFAF2C33E9AB0078004C /* AllListViewController.swift */; };
+		C468DFB42C33EB610078004C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFB32C33EB610078004C /* BaseView.swift */; };
+		C468DFB62C33EB6B0078004C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFB52C33EB6B0078004C /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		C468DFA72C33E2E00078004C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C468DFAC2C33E8E20078004C /* ReuseableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseableProtocol.swift; sourceTree = "<group>"; };
 		C468DFAF2C33E9AB0078004C /* AllListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListViewController.swift; sourceTree = "<group>"; };
+		C468DFB32C33EB610078004C /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		C468DFB52C33EB6B0078004C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +63,9 @@
 		C468DF922C33E2AE0078004C /* haeyazi */ = {
 			isa = PBXGroup;
 			children = (
-				C468DFAE2C33E9920078004C /* AllList */,
+				C468DFB22C33EB550078004C /* Base */,
 				C468DFA92C33E8C40078004C /* Protocol */,
+				C468DFB12C33EB450078004C /* Controllers */,
 				C468DF932C33E2AE0078004C /* AppDelegate.swift */,
 				C468DF952C33E2AE0078004C /* SceneDelegate.swift */,
 				C468DF9C2C33E2AF0078004C /* Assets.xcassets */,
@@ -78,12 +83,29 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		C468DFAE2C33E9920078004C /* AllList */ = {
+		C468DFAE2C33E9920078004C /* List */ = {
 			isa = PBXGroup;
 			children = (
 				C468DFAF2C33E9AB0078004C /* AllListViewController.swift */,
 			);
-			path = AllList;
+			path = List;
+			sourceTree = "<group>";
+		};
+		C468DFB12C33EB450078004C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C468DFAE2C33E9920078004C /* List */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C468DFB22C33EB550078004C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C468DFB32C33EB610078004C /* BaseView.swift */,
+				C468DFB52C33EB6B0078004C /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,8 +181,10 @@
 			files = (
 				C468DFAD2C33E8E20078004C /* ReuseableProtocol.swift in Sources */,
 				C468DF942C33E2AE0078004C /* AppDelegate.swift in Sources */,
+				C468DFB42C33EB610078004C /* BaseView.swift in Sources */,
 				C468DFB02C33E9AB0078004C /* AllListViewController.swift in Sources */,
 				C468DF962C33E2AE0078004C /* SceneDelegate.swift in Sources */,
+				C468DFB62C33EB6B0078004C /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

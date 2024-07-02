@@ -7,11 +7,11 @@
 
 import UIKit
 
-class AllListViewController: UIViewController {
+class AllListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        
     }
     
 }
