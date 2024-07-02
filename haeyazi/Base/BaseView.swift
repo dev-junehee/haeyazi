@@ -27,6 +27,5 @@ class BaseView: UIView {
     func configureViewLayout() { }
     
     // 디자인 & 변하지 않는 데이터
-    func configureViewUI() {
-    }
+    func configureViewUI() { }
 }
