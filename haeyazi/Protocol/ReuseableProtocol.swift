@@ -16,3 +16,9 @@ extension UIView: ReuseableProtocol {
         return String(describing: self)
     }
 }
+
+extension UIViewController: ReuseableProtocol {
+    static var id: String {
+        return String(describing: self)
+    }
+}

@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
         configureUI()
     }
     
-    // navigationItem.Title, delegate...
+    // delegate...
     func configureController() { }
     
     // 계층
@@ -28,7 +28,7 @@ class BaseViewController: UIViewController {
     
     // 디자인 & 변하지 않는 데이터
     func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Resources.Color.background
     }
     
 }
