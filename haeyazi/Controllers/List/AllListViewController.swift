@@ -12,8 +12,8 @@ final class AllListViewController: BaseViewController {
     
     private let allView = AllListView()
     
-    let realm = try! Realm()
-    var todoList: Results<Todo>! {
+    private let realm = try! Realm()
+    private var todoList: Results<Todo>! {
         didSet {
             allView.tableView.reloadData()
         }
@@ -110,11 +110,9 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let todo = todoList[indexPath.row]
         
-        let done = UIContextualAction(style: .normal, title: todo.isDone ? "미완료" : "완료") { action, view, completionHandler in
+        let done = UIContextualAction(style: .normal, title: todo.isDone ? "미완료" : "완료") { _, _, completionHandler in
             try! self.realm.write {
                 todo.isDone = !todo.isDone
-                print(todo.isDone ? "할 일 완료 처리" : "할 일 미완료 처리")
-                
                 if let cell = tableView.cellForRow(at: indexPath) as? TodoTableViewCell {
                     cell.updateDoneButtonUI(isDone: todo.isDone)
                 }
@@ -123,7 +121,7 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
             self.allView.tableView.reloadData()
         }
         
-        let delete = UIContextualAction(style: .destructive, title: "삭제" ) { action, view, completionHandler in
+        let delete = UIContextualAction(style: .destructive, title: "삭제" ) { _, _, _ in
             try! self.realm.write {
                 self.realm.delete(todo)
             }
