@@ -50,11 +50,11 @@ class TodoTableViewCell: BaseTableViewCell {
         }
         
         memoLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
+            $0.top.equalTo(titleLabel.snp.bottom)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(memoLabel.snp.bottom).offset(4)
+            $0.top.equalTo(memoLabel.snp.bottom)
         }
     }
     
@@ -69,13 +69,15 @@ class TodoTableViewCell: BaseTableViewCell {
         checkButton.setImage(Resources.SystemImage.uncheck, for: .normal)
         checkButton.setImage(Resources.SystemImage.check, for: .selected)
         
-        
-        titleLabel.text = "할 일 제목"
         titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        memoLabel.text = "메모 메모 메모 메모 메모 메모"
         memoLabel.font = .systemFont(ofSize: 14, weight: .regular)
-        dateLabel.text = "\(Date())"
         dateLabel.textColor = .gray
         dateLabel.font = .systemFont(ofSize: 14, weight: .regular)
+    }
+    
+    func configureCellData(data: Todo) {
+        titleLabel.text = data.title
+        memoLabel.text = data.memo
+        dateLabel.text = data.regDate.formatted()
     }
 }

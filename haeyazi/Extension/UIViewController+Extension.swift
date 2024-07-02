@@ -17,6 +17,11 @@ enum BarButtonType {
     case image
 }
 
+enum AlertStyle {
+    case oneButton
+    case twoButton
+}
+
 extension UIViewController {
     // BarButton
     func setBarButton(type: BarButtonType, position: BarButtonPosition, title: String?, image: UIImage?, color: UIColor, action: Selector?) {
@@ -36,6 +41,29 @@ extension UIViewController {
             navigationItem.leftBarButtonItem = barButton
         case .right:
             navigationItem.rightBarButtonItem = barButton
+        }
+    }
+    
+    // Alert
+    func showAlert(style: AlertStyle, title: String, message: String?, completionHandler: @escaping () -> Void?) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        switch style {
+        case .oneButton:
+            let okay = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(okay)
+            completionHandler()
+            present(alert, animated: true)
+        case .twoButton:
+            let okay = UIAlertAction(title: "확인", style: .default)
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(okay)
+            alert.addAction(cancel)
+            completionHandler()
+            present(alert, animated: true)
         }
     }
 }
