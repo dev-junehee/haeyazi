@@ -13,7 +13,7 @@ enum PaddingPosition {
 }
 
 extension UITextField {
-    func setTextFieldUI(placeholder: String) {
+    func setTextFieldUI(placeholder: String? = nil) {
         self.placeholder = placeholder
         self.backgroundColor = Resources.Color.white
         self.clipsToBounds = true

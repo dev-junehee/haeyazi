@@ -36,6 +36,7 @@ final class AddViewController: BaseViewController {
     }
     
     override func configureController() {
+        super.configureController()
         navigationItem.title = Constants.Add.navigationTitle
         
         setBarButton(type: .text, position: .left, title: Constants.Button.cancel, image: nil, color: nil, action: #selector(cancelBarButtonClicked))

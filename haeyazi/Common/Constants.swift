@@ -26,7 +26,7 @@ enum Constants {
         static let title = "제목"
         static let memo = "메모"
         static let sectionTitles = ["마감일", "태그", "우선순위", "이미지 추가"]
-        static let placeholders = ["제목을 입력해 주세요.", "내용을 입력해 주세요."]
+        static let placeholders = ["제목을 입력해 주세요.", "메모를 입력해 주세요."]
         static let priority =  ["높아요", "보통이에요", "낮아요"]
     }
     

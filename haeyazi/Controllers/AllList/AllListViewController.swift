@@ -107,6 +107,13 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let todo = todoList[indexPath.row]
+        let detailVC = DetailViewController()
+        detailVC.todoData = todo
+        present(UINavigationController(rootViewController: detailVC), animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let todo = todoList[indexPath.row]
         
