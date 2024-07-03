@@ -13,12 +13,12 @@ class Todo: Object {
     @Persisted var title: String        // 제목 (필수*)
     @Persisted var memo: String?        // 메모 (옵션)
     @Persisted var regDate: Date        // 생성일 (필수*)
-    @Persisted var endDate: String?       // 마감일 (옵션)
+    @Persisted var endDate: Date?       // 마감일 (옵션)
     @Persisted var tag: String?         // 태그 (옵션)
     @Persisted var priority: Int?       // 우선순위 (필수*)
     @Persisted var isDone: Bool         // 완료 여부 (필수*)
     
-    convenience init(title: String, memo: String? = nil, regDate: Date, endDate: String? = nil, tag: String? = nil, priority: Int? = 1) {
+    convenience init(title: String, memo: String? = nil, regDate: Date, endDate: Date? = nil, tag: String? = nil, priority: Int? = 1) {
         self.init()
         self.title = title
         self.memo = memo

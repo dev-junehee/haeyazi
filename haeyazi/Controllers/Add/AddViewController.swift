@@ -15,7 +15,7 @@ final class AddViewController: BaseViewController {
         0: "",      // 마감일
         1: "",      // 태그
         2: "",      // 우선순위
-        3: 1       // 이미지 추가
+        3: ""      // 이미지 추가
     ] {
         didSet {
             addView.tableView.reloadData()
@@ -67,7 +67,7 @@ final class AddViewController: BaseViewController {
             title: title,
             memo: memo,
             regDate: Date(),
-            endDate: userSelectedData[0] as? String,
+            endDate: userSelectedData[0] as? Date,
             tag: userSelectedData[1] as? String,
             priority: userSelectedData[2] as? Int
         )
@@ -96,7 +96,16 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         let section = indexPath.section
         let title = Constants.Add.sectionTitles[section]
         
-        if section == 2 {
+        
+        if section == 0 {
+            // 마감일
+            let data = userSelectedData[section] as? Date
+            cell.configureDateCellData(title: title, data: data ?? Date())
+        } else if section == 1 {
+            // 태그
+            let data = userSelectedData[section] as? String
+            cell.configureTagCellData(title: title, tag: data)
+        } else if section == 2 {
             // 우선순위 높 보통 낮
             let data = userSelectedData[section] as? Int
             cell.configurePriorityCellData(title: title, data: data)
@@ -119,10 +128,12 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
+        
         if section == 0 {
             let endDateVC = EndDateViewController()
-            endDateVC.sendDate = { date in  // String
-                self.userSelectedData[section] = date
+            endDateVC.sendDate = { date in  // Date
+                self.userSelectedData[section] = date ?? Date()
+                print("여기두...", self.userSelectedData)
             }
             navigationController?.pushViewController(endDateVC, animated: true)
         } else if section == 1 {
@@ -134,14 +145,11 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         } else if section == 2 {
             let priorityVC = PriorityViewController()
             priorityVC.sendPriority = { priority in     // Int
-                print("확인해볼까용^^", priority)
                 self.userSelectedData[section] = priority
             }
             navigationController?.pushViewController(priorityVC, animated: true)
         } else {
-            showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) {
-                return
-            }
+            showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) { return }
         }
     }
 }

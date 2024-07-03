@@ -60,6 +60,23 @@ class AddTableViewCell: BaseTableViewCell {
         dataLabel.text = data ?? ""
     }
     
+    // 마감일
+    func configureDateCellData(title: String, data: Date) {
+        titleLabel.text = title
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd (EE)"
+        let formattedDate = dateFormatter.string(for: data)
+        dataLabel.text = formattedDate
+    }
+    
+    // 태그
+    func configureTagCellData(title: String, tag: String?) {
+        titleLabel.text = title
+        dataLabel.text = tag ?? ""
+    }
+    
+    // 우선순위
     func configurePriorityCellData(title: String, data: Int?) {
         titleLabel.text = title
         dataLabel.text = Constants.Add.priority[data ?? 1]
