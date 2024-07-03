@@ -11,11 +11,11 @@ import RealmSwift
 final class AddViewController: BaseViewController {
     
     private let addView = AddView()
-    private var userSelectedData: [Int: String] = [
-        0: "",
-        1: "",
-        2: "",
-        3: ""
+    private var userSelectedData: [Int: Any] = [
+        0: "",      // 마감일
+        1: "",      // 태그
+        2: "",      // 우선순위
+        3: 1       // 이미지 추가
     ] {
         didSet {
             addView.tableView.reloadData()
@@ -63,11 +63,19 @@ final class AddViewController: BaseViewController {
             return
         }
         
-        let todo = Todo(title: title, memo: memo, regDate: Date())
+        let todo = Todo(
+            title: title,
+            memo: memo,
+            regDate: Date(),
+            endDate: userSelectedData[0] as? String,
+            tag: userSelectedData[1] as? String,
+            priority: userSelectedData[2] as? Int
+        )
         
         try! realm.write {
             realm.add(todo)
             print("DB 저장 성공!")
+            print("주소 확인", realm.configuration.fileURL)
         }
         dismiss(animated: true)
     }
@@ -84,10 +92,19 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.id, for: indexPath) as? AddTableViewCell else { return AddTableViewCell() }
+        
         let section = indexPath.section
         let title = Constants.Add.sectionTitles[section]
-        let data = userSelectedData[section]
-        cell.configureCellData(title: title, data: data)
+        
+        if section == 2 {
+            // 우선순위 높 보통 낮
+            let data = userSelectedData[section] as? Int
+            cell.configurePriorityCellData(title: title, data: data)
+        } else {
+            let data = userSelectedData[section] as? String
+            cell.configureCellData(title: title, data: data)
+        }
+       
         return cell
     }
     
@@ -104,19 +121,20 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         let section = indexPath.section
         if section == 0 {
             let endDateVC = EndDateViewController()
-            endDateVC.sendDate = { date in
+            endDateVC.sendDate = { date in  // String
                 self.userSelectedData[section] = date
             }
             navigationController?.pushViewController(endDateVC, animated: true)
         } else if section == 1 {
             let tagVC = TagViewController()
-            tagVC.sendTag = { tag in
+            tagVC.sendTag = { tag in       // String
                 self.userSelectedData[section] = tag
             }
             navigationController?.pushViewController(tagVC, animated: true)
         } else if section == 2 {
             let priorityVC = PriorityViewController()
-            priorityVC.sendPriority = { priority in
+            priorityVC.sendPriority = { priority in     // Int
+                print("확인해볼까용^^", priority)
                 self.userSelectedData[section] = priority
             }
             navigationController?.pushViewController(priorityVC, animated: true)

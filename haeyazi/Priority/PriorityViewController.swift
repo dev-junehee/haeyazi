@@ -12,7 +12,7 @@ final class PriorityViewController: BaseViewController {
     private let priorityView = PriorityView()
     
     var selectedPriority: Int?
-    var sendPriority: ((String) -> Void)?
+    var sendPriority: ((Int) -> Void)?
     
     override func loadView() {
         self.view = priorityView
@@ -24,9 +24,8 @@ final class PriorityViewController: BaseViewController {
     }
     
     private func setSelectedPriority() {
-        let titles = priorityView.controlTitles
         let selected = priorityView.priorityControl.selectedSegmentIndex
-        sendPriority?(titles[selected])
+        sendPriority?(selected)
     }
     
 }

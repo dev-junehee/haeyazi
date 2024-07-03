@@ -25,19 +25,20 @@ class AddTableViewCell: BaseTableViewCell {
         titleLabel.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView)
             $0.leading.equalTo(contentView).inset(16)
+            $0.width.equalTo(100)
         }
         
         dataLabel.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView)
-            $0.trailing.equalTo(arrowButton.snp.leading).inset(40)
-            $0.width.equalTo(170)
+            $0.trailing.equalTo(arrowButton.snp.leading)
+            $0.width.equalTo(120)
         }
         
         arrowButton.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView)
             $0.trailing.equalTo(contentView).inset(16)
             $0.leading.equalTo(dataLabel.snp.trailing)
-            $0.size.equalTo(10)
+            $0.width.equalTo(10)
             $0.centerY.equalTo(contentView)
         }
     }
@@ -48,6 +49,7 @@ class AddTableViewCell: BaseTableViewCell {
         titleLabel.font = .systemFont(ofSize: 15, weight: .regular)
         dataLabel.font = .systemFont(ofSize: 14, weight: .light)
         dataLabel.textColor = Resources.Color.primary
+        dataLabel.textAlignment = .center
         arrowButton.image = Resources.SystemImage.right
         arrowButton.contentMode = .scaleAspectFit
         arrowButton.tintColor = .gray
@@ -56,6 +58,11 @@ class AddTableViewCell: BaseTableViewCell {
     func configureCellData(title: String, data: String?) {
         titleLabel.text = title
         dataLabel.text = data ?? ""
+    }
+    
+    func configurePriorityCellData(title: String, data: Int?) {
+        titleLabel.text = title
+        dataLabel.text = Constants.Add.priority[data ?? 1]
     }
     
 }

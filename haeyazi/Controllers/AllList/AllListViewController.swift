@@ -31,6 +31,8 @@ final class AllListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(self, #function, "스키마 버전 확인", realm.configuration.schemaVersion)
         getNotification()
     }
     
