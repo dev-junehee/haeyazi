@@ -19,6 +19,10 @@ enum Resources {
         static let black: UIColor = .black
         static let white: UIColor = .white
         static let background: UIColor = .systemGroupedBackground
+        
+        static var mainColors: [UIColor] {
+            return [.systemBlue, .systemRed, .systemGray, .systemYellow, .systemGray]
+        }
     }
     
     enum Font {
@@ -26,13 +30,27 @@ enum Resources {
     }
     
     enum SystemImage {
-        static let add = UIImage(systemName: "plus.circle.fill")
-        static let sort = UIImage(systemName: "ellipsis.circle")
-        static let check = UIImage(systemName: "checkmark.circle.fill")
-        static let uncheck = UIImage(systemName: "circle")
-        static let right = UIImage(systemName: "chevron.right")
-        static let text = UIImage(systemName: "textformat")
-        static let calendar = UIImage(systemName: "calendar")
-        static let priority = UIImage(systemName: "list.number")
+        static let add = UIImage(systemName: "plus.circle.fill")!
+        static let sort = UIImage(systemName: "ellipsis.circle")!
+        static let check = UIImage(systemName: "checkmark.circle.fill")!
+        static let uncheck = UIImage(systemName: "circle")!
+        static let left = UIImage(systemName: "chevron.left")!
+        static let right = UIImage(systemName: "chevron.right")!
+        static let text = UIImage(systemName: "textformat")!
+        static let calendar = UIImage(systemName: "calendar")!
+        static let priority = UIImage(systemName: "list.number")!
+        static let flag = UIImage(systemName: "flag.fill")!
+        static let tray = UIImage(systemName: "tray.fill")!
+        static let checkmark = UIImage(systemName: "checkmark")!
+        static let paperplane = UIImage(systemName: "paperplane.fill")!
+        
+        static var mainIcons: [UIImage] {
+            return [
+                Resources.SystemImage.calendar,
+                Resources.SystemImage.paperplane,
+                Resources.SystemImage.tray,
+                Resources.SystemImage.flag,
+                Resources.SystemImage.checkmark]
+        }
     }
 }

@@ -34,7 +34,7 @@ class AllListView: BaseView {
     }
     
     override func configureViewUI() {
-        titleLabel.text = Constants.AllList.title
+        titleLabel.text = Constants.Title.all
         titleLabel.font = Resources.Font.title
     
         tableView.backgroundColor = .white

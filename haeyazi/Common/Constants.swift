@@ -13,8 +13,12 @@ import Foundation
  - Add : 할 일 추가 화면
  */
 enum Constants {
-    enum AllList {
-        static let title = "전체"
+    enum Title {
+        static let all = "전체"
+    }
+    
+    enum Main {
+        static let titles = ["오늘", "예정", "전체", "깃발 표시", "완료됨"]
     }
     
     enum Add: CaseIterable {

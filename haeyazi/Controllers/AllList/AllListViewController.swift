@@ -46,10 +46,14 @@ final class AllListViewController: BaseViewController {
         allView.tableView.rowHeight = 80
     }
     
-    @objc private func addButtonClicked() {
-        print(AllListViewController.id, #function, "추가 버튼 클릭")
-        let addVC = UINavigationController(rootViewController: AddViewController())
-        present(addVC, animated: true)
+//    @objc private func addButtonClicked() {
+//        print(AllListViewController.id, #function, "추가 버튼 클릭")
+//        let addVC = UINavigationController(rootViewController: AddViewController())
+//        present(addVC, animated: true)
+//    }
+    
+    @objc private func backBarButtonClicked() {
+        navigationController?.popViewController(animated: true)
     }
     
     // dismiss 알림오면 테이블뷰 리로드
@@ -63,7 +67,8 @@ final class AllListViewController: BaseViewController {
 
 extension AllListViewController {
     private func setBarButtons() {
-        setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.add, color: nil, action: #selector(addButtonClicked))
+//        setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.add, color: nil, action: #selector(addButtonClicked))
+        setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.left, color: nil, action: #selector(backBarButtonClicked))
         setBarButton(type: .image, position: .right, title: nil, image: Resources.SystemImage.sort, color: nil, action: nil)
     }
     

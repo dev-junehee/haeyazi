@@ -24,7 +24,7 @@ class EndDateViewController: BaseViewController {
         sendDate?(selectedDate)
     }
     
-    override func configureHierarchy() {
+    override func configureController() {
         dateView.calendar.delegate = self
         let dateSelection = UICalendarSelectionSingleDate(delegate: self)
         dateView.calendar.selectionBehavior = dateSelection
