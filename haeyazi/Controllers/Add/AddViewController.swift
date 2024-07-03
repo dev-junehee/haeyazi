@@ -11,6 +11,16 @@ import RealmSwift
 final class AddViewController: BaseViewController {
     
     private let addView = AddView()
+    private var userSelectedData: [Int: Any] = [
+        0: "",      // 마감일
+        1: "",      // 태그
+        2: "",      // 우선순위
+        3: ""      // 이미지 추가
+    ] {
+        didSet {
+            addView.tableView.reloadData()
+        }
+    }
     
     override func loadView() {
         self.view = addView
@@ -19,7 +29,7 @@ final class AddViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(
-            name:NSNotification.Name(AddViewController.id),
+            name: NSNotification.Name(AddViewController.id),
             object: nil,
             userInfo: nil
         )
@@ -53,11 +63,19 @@ final class AddViewController: BaseViewController {
             return
         }
         
-        let todo = Todo(title: title, memo: memo, regDate: Date())
+        let todo = Todo(
+            title: title,
+            memo: memo,
+            regDate: Date(),
+            endDate: userSelectedData[0] as? Date,
+            tag: userSelectedData[1] as? String,
+            priority: userSelectedData[2] as? Int
+        )
         
         try! realm.write {
             realm.add(todo)
             print("DB 저장 성공!")
+            print("주소 확인", realm.configuration.fileURL)
         }
         dismiss(animated: true)
     }
@@ -74,8 +92,28 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.id, for: indexPath) as? AddTableViewCell else { return AddTableViewCell() }
-        let title = Constants.Add.sectionTitles[indexPath.section]
-        cell.configureCellData(title: title)
+        
+        let section = indexPath.section
+        let title = Constants.Add.sectionTitles[section]
+        
+        
+        if section == 0 {
+            // 마감일
+            let data = userSelectedData[section] as? Date
+            cell.configureDateCellData(title: title, data: data ?? Date())
+        } else if section == 1 {
+            // 태그
+            let data = userSelectedData[section] as? String
+            cell.configureTagCellData(title: title, tag: data)
+        } else if section == 2 {
+            // 우선순위 높 보통 낮
+            let data = userSelectedData[section] as? Int
+            cell.configurePriorityCellData(title: title, data: data)
+        } else {
+            let data = userSelectedData[section] as? String
+            cell.configureCellData(title: title, data: data)
+        }
+       
         return cell
     }
     
@@ -90,16 +128,28 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
+        
         if section == 0 {
-            navigationController?.pushViewController(EndDateViewController(), animated: true)
-        } else if section == 1 {
-            navigationController?.pushViewController(TagViewController(), animated: true)
-        } else if section == 2 {
-            navigationController?.pushViewController(PriorityViewController(), animated: true)
-        } else {
-            showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) {
-                return
+            let endDateVC = EndDateViewController()
+            endDateVC.sendDate = { date in  // Date
+                self.userSelectedData[section] = date ?? Date()
+                print("여기두...", self.userSelectedData)
             }
+            navigationController?.pushViewController(endDateVC, animated: true)
+        } else if section == 1 {
+            let tagVC = TagViewController()
+            tagVC.sendTag = { tag in       // String
+                self.userSelectedData[section] = tag
+            }
+            navigationController?.pushViewController(tagVC, animated: true)
+        } else if section == 2 {
+            let priorityVC = PriorityViewController()
+            priorityVC.sendPriority = { priority in     // Int
+                self.userSelectedData[section] = priority
+            }
+            navigationController?.pushViewController(priorityVC, animated: true)
+        } else {
+            showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) { return }
         }
     }
 }

@@ -33,6 +33,8 @@
 		C468DFE42C3524A30078004C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE32C3524A30078004C /* TagViewController.swift */; };
 		C468DFE72C3524E80078004C /* PriorityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE62C3524E80078004C /* PriorityViewController.swift */; };
 		C468DFE92C3527250078004C /* EndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE82C3527250078004C /* EndDateView.swift */; };
+		C468DFEB2C35425B0078004C /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFEA2C35425B0078004C /* TagView.swift */; };
+		C468DFED2C3547680078004C /* PriorityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFEC2C3547680078004C /* PriorityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		C468DFE32C3524A30078004C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		C468DFE62C3524E80078004C /* PriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewController.swift; sourceTree = "<group>"; };
 		C468DFE82C3527250078004C /* EndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndDateView.swift; sourceTree = "<group>"; };
+		C468DFEA2C35425B0078004C /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		C468DFEC2C3547680078004C /* PriorityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				C468DFE32C3524A30078004C /* TagViewController.swift */,
+				C468DFEA2C35425B0078004C /* TagView.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				C468DFE62C3524E80078004C /* PriorityViewController.swift */,
+				C468DFEC2C3547680078004C /* PriorityView.swift */,
 			);
 			path = Priority;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 			files = (
 				C468DFD72C3409E60078004C /* AddTableViewCell.swift in Sources */,
 				C468DFAD2C33E8E20078004C /* ReuseableProtocol.swift in Sources */,
+				C468DFED2C3547680078004C /* PriorityView.swift in Sources */,
 				C468DF942C33E2AE0078004C /* AppDelegate.swift in Sources */,
 				C468DFDB2C3437500078004C /* TodoModel.swift in Sources */,
 				C468DFE72C3524E80078004C /* PriorityViewController.swift in Sources */,
@@ -321,6 +328,7 @@
 				C468DFB02C33E9AB0078004C /* AllListViewController.swift in Sources */,
 				C468DF962C33E2AE0078004C /* SceneDelegate.swift in Sources */,
 				C468DFE12C3524660078004C /* EndDateViewController.swift in Sources */,
+				C468DFEB2C35425B0078004C /* TagView.swift in Sources */,
 				C468DFB82C33EED70078004C /* AllListView.swift in Sources */,
 				C468DFE42C3524A30078004C /* TagViewController.swift in Sources */,
 				C468DFD32C34024D0078004C /* TodoTableViewCell.swift in Sources */,

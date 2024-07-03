@@ -7,11 +7,20 @@
 
 import Foundation
 
-class TagViewController: BaseViewController {
+final class TagViewController: BaseViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("태그 화면 진입")
+    private let tagView = TagView()
+    
+    var sendTag: ((String) -> Void)?
+    
+    override func loadView() {
+        self.view = tagView
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(self, "보내기 전 확인", tagView.tagField.text)
+        sendTag?(tagView.tagField.text ?? "")
     }
     
 }
