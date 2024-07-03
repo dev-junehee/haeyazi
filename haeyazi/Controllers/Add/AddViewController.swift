@@ -116,6 +116,9 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(tagVC, animated: true)
         } else if section == 2 {
             let priorityVC = PriorityViewController()
+            priorityVC.sendPriority = { priority in
+                self.userSelectedData[section] = priority
+            }
             navigationController?.pushViewController(priorityVC, animated: true)
         } else {
             showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) {

@@ -11,7 +11,6 @@ final class TagViewController: BaseViewController {
     
     private let tagView = TagView()
     
-    var selectedTag = ""
     var sendTag: ((String) -> Void)?
     
     override func loadView() {
