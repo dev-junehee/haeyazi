@@ -31,6 +31,7 @@ enum Constants {
     }
     
     enum Tag {
+        static let tag = "태그"
         static let placeholder = "태그를 입력해 주세요."
         
     }
@@ -46,6 +47,7 @@ enum Constants {
     enum Button {
         static let add = "추가"
         static let delete = "삭제"
+        static let okay = "확인"
         static let cancel = "취소"
         static let complete = "완료"
         static let new = "새로운 할 일"

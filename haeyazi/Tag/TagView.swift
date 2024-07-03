@@ -35,7 +35,7 @@ class TagView: BaseView {
     }
     
     override func configureViewUI() {
-        tagLabel.text = "태그"
+        tagLabel.text = Constants.Tag.tag
         tagLabel.font = Resources.Font.medium14
         
         tagField.setTextFieldUI(placeholder: Constants.Tag.placeholder)
