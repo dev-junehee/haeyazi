@@ -68,7 +68,11 @@ class TodoTableViewCell: BaseTableViewCell {
     func configureCellData(data: Todo) {
         titleLabel.text = data.title
         memoLabel.text = data.memo
-        dateLabel.text = data.regDate.formatted()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd (EE) hh:mm"
+        let formattedDate = dateFormatter.string(for: data.regDate)
+        dateLabel.text = formattedDate
     }
     
     func updateDoneButtonUI(isDone: Bool) {

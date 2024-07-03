@@ -26,7 +26,7 @@ enum Constants {
         static let title = "제목"
         static let memo = "메모"
         static let sectionTitles = ["마감일", "태그", "우선순위", "이미지 추가"]
-        static let placeholders = ["제목을 입력해 주세요.", "내용을 입력해 주세요."]
+        static let placeholders = ["제목을 입력해 주세요.", "메모를 입력해 주세요."]
         static let priority =  ["높아요", "보통이에요", "낮아요"]
     }
     
@@ -44,9 +44,14 @@ enum Constants {
         }
     }
     
+    enum Detail {
+        static let navigationTitle = "상세정보"
+    }
+    
     enum Button {
         static let add = "추가"
         static let delete = "삭제"
+        static let edit = "수정"
         static let okay = "확인"
         static let cancel = "취소"
         static let complete = "완료"
