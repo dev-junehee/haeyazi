@@ -153,9 +153,7 @@
 				C468DFAE2C33E9920078004C /* AllList */,
 				C468DFF72C3598130078004C /* Detail */,
 				C468DFC72C33F7310078004C /* Add */,
-				C468DFDF2C35244A0078004C /* EndDate */,
-				C468DFE52C3524C20078004C /* Priority */,
-				C468DFE22C3524930078004C /* Tag */,
+				C468DFFC2C35B88B0078004C /* Edit */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -267,6 +265,16 @@
 				C468DFFA2C3598400078004C /* DetailView.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		C468DFFC2C35B88B0078004C /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				C468DFDF2C35244A0078004C /* EndDate */,
+				C468DFE52C3524C20078004C /* Priority */,
+				C468DFE22C3524930078004C /* Tag */,
+			);
+			path = Edit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
