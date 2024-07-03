@@ -28,8 +28,8 @@ final class AddViewController: BaseViewController {
     override func configureController() {
         navigationItem.title = Constants.Add.title
         
-        setBarButton(type: .text, position: .left, title: Constants.cancel, image: nil, color: Resources.Color.primary, action: #selector(cancelBarButtonClicked))
-        setBarButton(type: .text, position: .right, title: Constants.add, image: nil, color: Resources.Color.primary, action: #selector(addBarButtonClicked))
+        setBarButton(type: .text, position: .left, title: Constants.cancel, image: nil, color: nil, action: #selector(cancelBarButtonClicked))
+        setBarButton(type: .text, position: .right, title: Constants.add, image: nil, color: nil, action: #selector(addBarButtonClicked))
         
         addView.tableView.delegate = self
         addView.tableView.dataSource = self
@@ -89,9 +89,17 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Add - 각 버튼 클릭", indexPath)
-//        navigationController?.pushViewController(UIViewController(), animated: true)
+        let section = indexPath.section
+        if section == 0 {
+            navigationController?.pushViewController(EndDateViewController(), animated: true)
+        } else if section == 1 {
+            navigationController?.pushViewController(TagViewController(), animated: true)
+        } else if section == 2 {
+            navigationController?.pushViewController(PriorityViewController(), animated: true)
+        } else {
+            showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) {
+                return
+            }
+        }
     }
-    
-    
 }

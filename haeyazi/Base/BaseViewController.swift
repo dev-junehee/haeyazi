@@ -18,7 +18,9 @@ class BaseViewController: UIViewController {
     }
     
     // delegate...
-    func configureController() { }
+    func configureController() {
+        navigationController?.navigationBar.tintColor = Resources.Color.primary
+    }
     
     // 계층
     func configureHierarchy() { }
