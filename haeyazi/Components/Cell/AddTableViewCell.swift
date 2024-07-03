@@ -11,10 +11,11 @@ import SnapKit
 class AddTableViewCell: BaseTableViewCell {
     
     let titleLabel = UILabel()
+    let dataLabel = UILabel()
     let arrowButton = UIImageView()
     
     override func configureCellHierarchy() {
-        let subViews = [titleLabel, arrowButton]
+        let subViews = [titleLabel, dataLabel, arrowButton]
         subViews.forEach {
             contentView.addSubview($0)
         }
@@ -24,13 +25,18 @@ class AddTableViewCell: BaseTableViewCell {
         titleLabel.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView)
             $0.leading.equalTo(contentView).inset(16)
-            $0.trailing.equalTo(arrowButton.snp.leading)
+        }
+        
+        dataLabel.snp.makeConstraints {
+            $0.verticalEdges.equalTo(contentView)
+            $0.trailing.equalTo(arrowButton.snp.leading).inset(40)
+            $0.width.equalTo(170)
         }
         
         arrowButton.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView)
             $0.trailing.equalTo(contentView).inset(16)
-            $0.leading.equalTo(titleLabel.snp.trailing)
+            $0.leading.equalTo(dataLabel.snp.trailing)
             $0.size.equalTo(10)
             $0.centerY.equalTo(contentView)
         }
@@ -40,13 +46,16 @@ class AddTableViewCell: BaseTableViewCell {
         self.clipsToBounds = true
         self.layer.cornerRadius = 16
         titleLabel.font = .systemFont(ofSize: 15, weight: .regular)
+        dataLabel.font = .systemFont(ofSize: 14, weight: .light)
+        dataLabel.textColor = Resources.Color.primary
         arrowButton.image = Resources.SystemImage.right
         arrowButton.contentMode = .scaleAspectFit
         arrowButton.tintColor = .gray
     }
     
-    func configureCellData(title: String) {
+    func configureCellData(title: String, data: String?) {
         titleLabel.text = title
+        dataLabel.text = data ?? ""
     }
     
 }

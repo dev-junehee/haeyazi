@@ -11,6 +11,16 @@ import RealmSwift
 final class AddViewController: BaseViewController {
     
     private let addView = AddView()
+    private var userSelectedData = [
+        "endDate": "",
+        "tag": "",
+        "priority": "",
+        "image": ""
+    ] {
+        didSet {
+            addView.tableView.reloadData()
+        }
+    }
     
     override func loadView() {
         self.view = addView
@@ -19,7 +29,7 @@ final class AddViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(
-            name:NSNotification.Name(AddViewController.id),
+            name: NSNotification.Name(AddViewController.id),
             object: nil,
             userInfo: nil
         )
@@ -74,8 +84,23 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.id, for: indexPath) as? AddTableViewCell else { return AddTableViewCell() }
-        let title = Constants.Add.sectionTitles[indexPath.section]
-        cell.configureCellData(title: title)
+        let section = indexPath.section
+        
+        var key = ""
+        if section == 0 {
+            key = "endDate"
+        } else if section == 1 {
+            key = "tag"
+        } else if section == 2 {
+            key = "priority"
+        } else {
+            key = "image"
+        }
+        
+        let title = Constants.Add.sectionTitles[section]
+        let data = userSelectedData[key]
+        cell.configureCellData(title: title, data: data)
+        
         return cell
     }
     
@@ -91,11 +116,18 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
         if section == 0 {
-            navigationController?.pushViewController(EndDateViewController(), animated: true)
+            let endDateVC = EndDateViewController()
+            endDateVC.sendDate = { date in
+                print("이게 나오면 진짜다", date)
+                self.userSelectedData["endDate"] = date
+            }
+            navigationController?.pushViewController(endDateVC, animated: true)
         } else if section == 1 {
-            navigationController?.pushViewController(TagViewController(), animated: true)
+            let tagVC = TagViewController()
+            navigationController?.pushViewController(tagVC, animated: true)
         } else if section == 2 {
-            navigationController?.pushViewController(PriorityViewController(), animated: true)
+            let priorityVC = PriorityViewController()
+            navigationController?.pushViewController(priorityVC, animated: true)
         } else {
             showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) {
                 return
