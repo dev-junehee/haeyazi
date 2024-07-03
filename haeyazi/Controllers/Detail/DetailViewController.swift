@@ -12,12 +12,21 @@ class DetailViewController: BaseViewController {
     let detailView = DetailView()
     
     var todoData: Todo?
-    var isEdit = false
+//    var updateTodoData: Todo? {
+//        didSet {
+//            detailView.tableView.reloadData()
+//        }
+//    }
     
     var sendNewData: ((String?) -> Void)?
     
     override func loadView() {
         self.view = detailView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        updateTodoData = todoData
     }
     
     override func configureController() {
@@ -114,5 +123,31 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        
+        if section == 0 {
+            let endDateVC = EndDateViewController()
+            endDateVC.sendDate = { date in // Date
+                self.todoData?.endDate = date ?? Date()
+            }
+            navigationController?.pushViewController(endDateVC, animated: true)
+        } else if section == 1 {
+            let tagVC = TagViewController()
+            tagVC.sendTag = { tag in // String
+                self.todoData?.tag = tag
+            }
+            navigationController?.pushViewController(tagVC, animated: true)
+        } else if section == 2 {
+            let priorityVC = PriorityViewController()
+            priorityVC.sendPriority = { priority in // Int
+                self.todoData?.priority = priority
+            }
+            navigationController?.pushViewController(priorityVC, animated: true)
+        } else {
+            showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) { return }
+        }
     }
 }
