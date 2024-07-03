@@ -33,6 +33,7 @@
 		C468DFE42C3524A30078004C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE32C3524A30078004C /* TagViewController.swift */; };
 		C468DFE72C3524E80078004C /* PriorityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE62C3524E80078004C /* PriorityViewController.swift */; };
 		C468DFE92C3527250078004C /* EndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE82C3527250078004C /* EndDateView.swift */; };
+		C468DFEB2C35425B0078004C /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFEA2C35425B0078004C /* TagView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		C468DFE32C3524A30078004C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		C468DFE62C3524E80078004C /* PriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewController.swift; sourceTree = "<group>"; };
 		C468DFE82C3527250078004C /* EndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndDateView.swift; sourceTree = "<group>"; };
+		C468DFEA2C35425B0078004C /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				C468DFE32C3524A30078004C /* TagViewController.swift */,
+				C468DFEA2C35425B0078004C /* TagView.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				C468DFB02C33E9AB0078004C /* AllListViewController.swift in Sources */,
 				C468DF962C33E2AE0078004C /* SceneDelegate.swift in Sources */,
 				C468DFE12C3524660078004C /* EndDateViewController.swift in Sources */,
+				C468DFEB2C35425B0078004C /* TagView.swift in Sources */,
 				C468DFB82C33EED70078004C /* AllListView.swift in Sources */,
 				C468DFE42C3524A30078004C /* TagViewController.swift in Sources */,
 				C468DFD32C34024D0078004C /* TodoTableViewCell.swift in Sources */,

@@ -11,11 +11,11 @@ import RealmSwift
 final class AddViewController: BaseViewController {
     
     private let addView = AddView()
-    private var userSelectedData = [
-        "endDate": "",
-        "tag": "",
-        "priority": "",
-        "image": ""
+    private var userSelectedData: [Int: String] = [
+        0: "",
+        1: "",
+        2: "",
+        3: ""
     ] {
         didSet {
             addView.tableView.reloadData()
@@ -85,22 +85,9 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.id, for: indexPath) as? AddTableViewCell else { return AddTableViewCell() }
         let section = indexPath.section
-        
-        var key = ""
-        if section == 0 {
-            key = "endDate"
-        } else if section == 1 {
-            key = "tag"
-        } else if section == 2 {
-            key = "priority"
-        } else {
-            key = "image"
-        }
-        
         let title = Constants.Add.sectionTitles[section]
-        let data = userSelectedData[key]
+        let data = userSelectedData[section]
         cell.configureCellData(title: title, data: data)
-        
         return cell
     }
     
@@ -118,12 +105,14 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             let endDateVC = EndDateViewController()
             endDateVC.sendDate = { date in
-                print("이게 나오면 진짜다", date)
-                self.userSelectedData["endDate"] = date
+                self.userSelectedData[section] = date
             }
             navigationController?.pushViewController(endDateVC, animated: true)
         } else if section == 1 {
             let tagVC = TagViewController()
+            tagVC.sendTag = { tag in
+                self.userSelectedData[section] = tag
+            }
             navigationController?.pushViewController(tagVC, animated: true)
         } else if section == 2 {
             let priorityVC = PriorityViewController()
