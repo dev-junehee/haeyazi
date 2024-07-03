@@ -20,7 +20,7 @@ enum Constants {
     enum Add: CaseIterable {
         static let title = "새로운 할 일"
         static let sectionTitles = ["마감일", "태그", "우선순위", "이미지 추가"]
-        static let placeholder = ["제목을 입력해 주세요.", "내용을 입력해 주세요."]
+        static let placeholders = ["제목을 입력해 주세요.", "내용을 입력해 주세요."]
     }
     
     static let add = "추가"
