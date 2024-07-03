@@ -111,6 +111,9 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
         let todo = todoList[indexPath.row]
         let detailVC = DetailViewController()
         detailVC.todoData = todo
+        detailVC.sendNewData = { data in
+            print(data)
+        }
         present(UINavigationController(rootViewController: detailVC), animated: true)
     }
     

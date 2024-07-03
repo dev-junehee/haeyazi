@@ -44,9 +44,14 @@ enum Constants {
         }
     }
     
+    enum Detail {
+        static let navigationTitle = "상세정보"
+    }
+    
     enum Button {
         static let add = "추가"
         static let delete = "삭제"
+        static let edit = "수정"
         static let okay = "확인"
         static let cancel = "취소"
         static let complete = "완료"

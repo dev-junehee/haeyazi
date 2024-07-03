@@ -11,12 +11,10 @@ class DetailViewController: BaseViewController {
     
     let detailView = DetailView()
     
-//    var title: String?
-//    var memo: String?
-    
     var todoData: Todo?
-    
     var isEdit = false
+    
+    var sendNewData: ((String?) -> Void)?
     
     override func loadView() {
         self.view = detailView
@@ -24,7 +22,7 @@ class DetailViewController: BaseViewController {
     
     override func configureController() {
         super.configureController()
-        navigationItem.title = "상세정보"
+        navigationItem.title = Constants.Detail.navigationTitle
         setEditBarButton()
         
         detailView.tableView.delegate = self
@@ -32,6 +30,9 @@ class DetailViewController: BaseViewController {
         detailView.tableView.register(AddTableViewCell.self, forCellReuseIdentifier: AddTableViewCell.id)
         detailView.tableView.rowHeight = 50
         detailView.tableView.separatorStyle = .none
+        
+        detailView.titleField.delegate = self
+        detailView.memoField.delegate = self
     }
     
     override func configureUI() {
@@ -42,15 +43,34 @@ class DetailViewController: BaseViewController {
     
     @objc private func editButtonClicked() {
         print(self, #function, "수정 버튼 클릭")
+        // 바뀐 제목/메모 확인
+        print(detailView.titleField.text)
+        print(detailView.memoField.text)
     }
+    
 }
 
 
 extension DetailViewController {
     private func setEditBarButton() {
-        setBarButton(type: .text, position: .right, title: "수정", image: nil, color: Resources.Color.gray, action: #selector(editButtonClicked))
+        setBarButton(type: .text, position: .right, title: Constants.Button.edit, image: nil, color: Resources.Color.gray, action: #selector(editButtonClicked))
         let button = navigationItem.rightBarButtonItem
-        button?.isHidden = true
+        button?.setTitleTextAttributes(
+            [.font: Resources.Font.bold18],
+            for: .normal
+        )
+    }
+}
+
+extension DetailViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("텍스트필드 수정 시작!")
+        let button = navigationItem.rightBarButtonItem
+        button?.tintColor = Resources.Color.primary
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("텍스트필드 수정 끝!")
     }
 }
 
