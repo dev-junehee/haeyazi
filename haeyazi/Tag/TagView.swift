@@ -36,11 +36,11 @@ class TagView: BaseView {
     
     override func configureViewUI() {
         tagLabel.text = "태그"
-        tagLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        tagLabel.font = Resources.Font.medium14
         
-        tagField.setTextFieldUI(placeholder: "태그를 입력해 주세요.")
+        tagField.setTextFieldUI(placeholder: Constants.Tag.placeholder)
         tagField.setPadding(type: .left, amount: 20)
-        tagField.font = .systemFont(ofSize: 14, weight: .regular)
+        tagField.font = Resources.Font.body14
     }
     
 }

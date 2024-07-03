@@ -69,9 +69,9 @@ class MainCollectionViewCell: BaseCollectionViewCell {
         contentView.layer.cornerRadius = 16
         iconView.tintColor = Resources.Color.white
         iconView.contentMode = .center
-        titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        titleLabel.textColor = .gray
-        countLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        titleLabel.font = Resources.Font.bold16
+        titleLabel.textColor = Resources.Color.gray
+        countLabel.font = Resources.Font.subTitle
     }
     
     func configureCellData(title: String, image: UIImage, color: UIColor, count: Int) {

@@ -46,7 +46,7 @@ class MainView: BaseView {
     override func configureViewUI() {
         titleLabel.text = Constants.Title.all
         titleLabel.font = Resources.Font.title
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = Resources.Color.clear
     }
     
 }

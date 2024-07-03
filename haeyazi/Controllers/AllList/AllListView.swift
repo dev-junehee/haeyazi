@@ -37,7 +37,7 @@ class AllListView: BaseView {
         titleLabel.text = Constants.Title.all
         titleLabel.font = Resources.Font.title
     
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = Resources.Color.white
         tableView.layer.cornerRadius = 20
         tableView.rowHeight = 90
     }

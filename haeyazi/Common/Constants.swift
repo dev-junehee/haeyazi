@@ -22,13 +22,39 @@ enum Constants {
     }
     
     enum Add: CaseIterable {
-        static let title = "새로운 할 일"
+        static let navigationTitle = "새로운 할 일"
+        static let title = "제목"
+        static let memo = "메모"
         static let sectionTitles = ["마감일", "태그", "우선순위", "이미지 추가"]
         static let placeholders = ["제목을 입력해 주세요.", "내용을 입력해 주세요."]
         static let priority =  ["높아요", "보통이에요", "낮아요"]
     }
     
+    enum Tag {
+        static let placeholder = "태그를 입력해 주세요."
+        
+    }
     
-    static let add = "추가"
-    static let cancel = "취소"
+    enum AllList {
+        enum Sort {
+            static let title = "제목순"
+            static let date = "마감일순"
+            static let priority = "우선순위 높은순"
+        }
+    }
+    
+    enum Button {
+        static let add = "추가"
+        static let delete = "삭제"
+        static let cancel = "취소"
+        static let complete = "완료"
+        static let new = "새로운 할 일"
+        static let list = "목록 추가"
+        static let incomplete = "미완료"
+    }
+    
+    enum Alert {
+        
+    }
+    
 }

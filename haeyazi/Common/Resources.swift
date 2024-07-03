@@ -17,8 +17,10 @@ enum Resources {
         static let primary: UIColor = .systemIndigo
         static let system: UIColor = .systemBackground
         static let black: UIColor = .black
+        static let gray: UIColor = .gray
         static let white: UIColor = .white
         static let background: UIColor = .systemGroupedBackground
+        static let clear: UIColor = .clear
         
         static var mainColors: [UIColor] {
             return [.systemBlue, .systemRed, .systemGray, .systemYellow, .systemGray]
@@ -27,6 +29,11 @@ enum Resources {
     
     enum Font {
         static let title: UIFont = .systemFont(ofSize: 42, weight: .black)
+        static let subTitle: UIFont = .systemFont(ofSize: 24, weight: .bold)
+        static let bold16: UIFont = .systemFont(ofSize: 16, weight: .bold)
+        static let medium14: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        static let body14: UIFont = .systemFont(ofSize: 14, weight: .regular)
+        static let light14: UIFont = .systemFont(ofSize: 14, weight: .light)
     }
     
     enum SystemImage {

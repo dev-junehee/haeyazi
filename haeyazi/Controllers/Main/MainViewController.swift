@@ -33,8 +33,8 @@ class MainViewController: BaseViewController {
 
 extension MainViewController {
     func setToolBarButtons() {
-        let addTodoButton = UIBarButtonItem(title: "새로운 할 일", image: Resources.SystemImage.add, target: self, action: #selector(addButtonClicked))
-        let addListButton = UIBarButtonItem(title: "목록 추가", style: .plain, target: self, action: #selector(listButtonClicked))
+        let addTodoButton = UIBarButtonItem(title: Constants.Button.new, image: Resources.SystemImage.add, target: self, action: #selector(addButtonClicked))
+        let addListButton = UIBarButtonItem(title: Constants.Button.list, style: .plain, target: self, action: #selector(listButtonClicked))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         
         navigationController?.toolbar.tintColor = Resources.Color.primary
@@ -49,6 +49,7 @@ extension MainViewController {
     
     @objc private func listButtonClicked() {
         print(self, #function)
+        showAlert(style: .oneButton, title: "준비 중이에요!", message: nil) { return }
     }
 }
 

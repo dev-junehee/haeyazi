@@ -63,14 +63,14 @@ class AddView: BaseView {
         for i in 0..<textFields.count {
             textFields[i].setTextFieldUI(placeholder: placeholders[i])
             textFields[i].setPadding(type: .left, amount: 20)
-            textFields[i].font = .systemFont(ofSize: 14, weight: .regular)
+            textFields[i].font = Resources.Font.body14
         }
         
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = Resources.Color.clear
         
-        titleLabel.text = "제목"
-        titleLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        memoLabel.text = "내용"
-        memoLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        titleLabel.text = Constants.Add.title
+        titleLabel.font = Resources.Font.medium14
+        memoLabel.text = Constants.Add.memo
+        memoLabel.font = Resources.Font.medium14
     }
 }
