@@ -50,7 +50,7 @@ class AddView: BaseView {
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(memoField.snp.bottom).offset(16)
+            $0.top.equalTo(memoField.snp.bottom).offset(32)
             $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
     }
@@ -59,20 +59,12 @@ class AddView: BaseView {
         self.backgroundColor = Resources.Color.background
         
         let textFields = [titleField, memoField]
-        let placeholders = Constants.Add.placeholder
-        textFields.forEach { field in
-            placeholders.forEach { placeholder in
-                field.setTextFieldUI(placeholder: placeholder)
-                field.setPadding(type: .left, amount: 20)
-                field.font = .systemFont(ofSize: 14, weight: .regular)
-            }
-            
+        let placeholders = Constants.Add.placeholders
+        for i in 0..<textFields.count {
+            textFields[i].setTextFieldUI(placeholder: placeholders[i])
+            textFields[i].setPadding(type: .left, amount: 20)
+            textFields[i].font = .systemFont(ofSize: 14, weight: .regular)
         }
-//        titleField.setTextFieldUI(placeholder: "제목을 입력해 주세요.")
-//        titleField.setPadding(type: .left, amount: 20)
-//        titleField.font = .systemFont(ofSize: 14, weight: .regular)
-//        memoField.setTextFieldUI(placeholder: "내용을 입력해 주세요.")
-//        memoField.setPadding(type: .left, amount: 20)
         
         tableView.backgroundColor = .clear
         

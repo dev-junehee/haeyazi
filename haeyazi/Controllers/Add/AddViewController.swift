@@ -34,7 +34,7 @@ final class AddViewController: BaseViewController {
         addView.tableView.delegate = self
         addView.tableView.dataSource = self
         addView.tableView.register(AddTableViewCell.self, forCellReuseIdentifier: AddTableViewCell.id)
-        addView.tableView.rowHeight = 60
+        addView.tableView.rowHeight = 50
         addView.tableView.separatorStyle = .none
     }
     
@@ -64,19 +64,34 @@ final class AddViewController: BaseViewController {
 }
 
 extension AddViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return Constants.Add.sectionTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.id, for: indexPath) as? AddTableViewCell else { return AddTableViewCell() }
-        let title = Constants.Add.sectionTitles[indexPath.row]
+        let title = Constants.Add.sectionTitles[indexPath.section]
         cell.configureCellData(title: title)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+        
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Add - 각 버튼 클릭", indexPath)
 //        navigationController?.pushViewController(UIViewController(), animated: true)
     }
+    
+    
 }
