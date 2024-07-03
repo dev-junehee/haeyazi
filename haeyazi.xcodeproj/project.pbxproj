@@ -32,6 +32,7 @@
 		C468DFE12C3524660078004C /* EndDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE02C3524660078004C /* EndDateViewController.swift */; };
 		C468DFE42C3524A30078004C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE32C3524A30078004C /* TagViewController.swift */; };
 		C468DFE72C3524E80078004C /* PriorityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE62C3524E80078004C /* PriorityViewController.swift */; };
+		C468DFE92C3527250078004C /* EndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFE82C3527250078004C /* EndDateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		C468DFE02C3524660078004C /* EndDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndDateViewController.swift; sourceTree = "<group>"; };
 		C468DFE32C3524A30078004C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		C468DFE62C3524E80078004C /* PriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewController.swift; sourceTree = "<group>"; };
+		C468DFE82C3527250078004C /* EndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndDateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				C468DFE02C3524660078004C /* EndDateViewController.swift */,
+				C468DFE82C3527250078004C /* EndDateView.swift */,
 			);
 			path = EndDate;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				C468DFE72C3524E80078004C /* PriorityViewController.swift in Sources */,
 				C468DFB42C33EB610078004C /* BaseView.swift in Sources */,
 				C468DFC92C33F73E0078004C /* AddViewController.swift in Sources */,
+				C468DFE92C3527250078004C /* EndDateView.swift in Sources */,
 				C468DFD92C3412870078004C /* UITextField+Extension.swift in Sources */,
 				C468DFD52C34025E0078004C /* BaseTableViewCell.swift in Sources */,
 				C468DFB02C33E9AB0078004C /* AllListViewController.swift in Sources */,
