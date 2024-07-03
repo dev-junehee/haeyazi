@@ -53,13 +53,13 @@ extension UIViewController {
         )
         switch style {
         case .oneButton:
-            let okay = UIAlertAction(title: "확인", style: .default)
+            let okay = UIAlertAction(title: Constants.Button.okay, style: .default)
             alert.addAction(okay)
             completionHandler()
             present(alert, animated: true)
         case .twoButton:
-            let okay = UIAlertAction(title: "확인", style: .default)
-            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            let okay = UIAlertAction(title: Constants.Button.okay, style: .default)
+            let cancel = UIAlertAction(title: Constants.Button.cancel, style: .cancel)
             alert.addAction(okay)
             alert.addAction(cancel)
             completionHandler()

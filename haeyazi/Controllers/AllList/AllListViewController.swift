@@ -46,10 +46,8 @@ final class AllListViewController: BaseViewController {
         allView.tableView.rowHeight = 80
     }
     
-    @objc private func addButtonClicked() {
-        print(AllListViewController.id, #function, "추가 버튼 클릭")
-        let addVC = UINavigationController(rootViewController: AddViewController())
-        present(addVC, animated: true)
+    @objc private func backBarButtonClicked() {
+        navigationController?.popViewController(animated: true)
     }
     
     // dismiss 알림오면 테이블뷰 리로드
@@ -63,20 +61,20 @@ final class AllListViewController: BaseViewController {
 
 extension AllListViewController {
     private func setBarButtons() {
-        setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.add, color: nil, action: #selector(addButtonClicked))
+        setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.left, color: nil, action: #selector(backBarButtonClicked))
         setBarButton(type: .image, position: .right, title: nil, image: Resources.SystemImage.sort, color: nil, action: nil)
     }
     
     private func setSortPullDownButton() {
         guard let sortButton = navigationItem.rightBarButtonItem else { return }
         
-        let sortedTitle = UIAction(title: "제목순", image: Resources.SystemImage.text) { _ in
+        let sortedTitle = UIAction(title: Constants.AllList.Sort.title, image: Resources.SystemImage.text) { _ in
             self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "title", ascending: true)
         }
-        let sortedDate = UIAction(title: "마감일순", image: Resources.SystemImage.calendar) { _ in
+        let sortedDate = UIAction(title: Constants.AllList.Sort.date, image: Resources.SystemImage.calendar) { _ in
             self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "regDate", ascending: true)
         }
-        let sortedPriority = UIAction(title: "우선순위 높은순", image: Resources.SystemImage.priority) { _ in
+        let sortedPriority = UIAction(title: Constants.AllList.Sort.priority, image: Resources.SystemImage.priority) { _ in
             self.showAlert(style: .oneButton, title: "준비 중인 기능이에요!", message: nil) { return }
         }
         
@@ -112,7 +110,7 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let todo = todoList[indexPath.row]
         
-        let done = UIContextualAction(style: .normal, title: todo.isDone ? "미완료" : "완료") { _, _, completionHandler in
+        let done = UIContextualAction(style: .normal, title: todo.isDone ? Constants.Button.incomplete : Constants.Button.complete) { _, _, completionHandler in
             try! self.realm.write {
                 todo.isDone = !todo.isDone
                 if let cell = tableView.cellForRow(at: indexPath) as? TodoTableViewCell {
@@ -123,7 +121,7 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
             self.allView.tableView.reloadData()
         }
         
-        let delete = UIContextualAction(style: .destructive, title: "삭제" ) { _, _, _ in
+        let delete = UIContextualAction(style: .destructive, title: Constants.Button.delete ) { _, _, _ in
             try! self.realm.write {
                 self.realm.delete(todo)
             }

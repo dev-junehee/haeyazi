@@ -59,10 +59,10 @@ class TodoTableViewCell: BaseTableViewCell {
     
     override func configureCellUI() {
         checkButton.setImage(Resources.SystemImage.uncheck, for: .normal)
-        titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        memoLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        titleLabel.font = Resources.Font.bold16
+        memoLabel.font = Resources.Font.body14
         dateLabel.textColor = .gray
-        dateLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        dateLabel.font = Resources.Font.body14
     }
     
     func configureCellData(data: Todo) {

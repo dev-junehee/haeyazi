@@ -46,13 +46,13 @@ class AddTableViewCell: BaseTableViewCell {
     override func configureCellUI() {
         self.clipsToBounds = true
         self.layer.cornerRadius = 16
-        titleLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        dataLabel.font = .systemFont(ofSize: 14, weight: .light)
+        titleLabel.font = Resources.Font.body14
+        dataLabel.font = Resources.Font.light14
         dataLabel.textColor = Resources.Color.primary
         dataLabel.textAlignment = .center
         arrowButton.image = Resources.SystemImage.right
         arrowButton.contentMode = .scaleAspectFit
-        arrowButton.tintColor = .gray
+        arrowButton.tintColor = Resources.Color.gray
     }
     
     func configureCellData(title: String, data: String?) {

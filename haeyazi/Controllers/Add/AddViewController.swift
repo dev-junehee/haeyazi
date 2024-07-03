@@ -36,10 +36,10 @@ final class AddViewController: BaseViewController {
     }
     
     override func configureController() {
-        navigationItem.title = Constants.Add.title
+        navigationItem.title = Constants.Add.navigationTitle
         
-        setBarButton(type: .text, position: .left, title: Constants.cancel, image: nil, color: nil, action: #selector(cancelBarButtonClicked))
-        setBarButton(type: .text, position: .right, title: Constants.add, image: nil, color: nil, action: #selector(addBarButtonClicked))
+        setBarButton(type: .text, position: .left, title: Constants.Button.cancel, image: nil, color: nil, action: #selector(cancelBarButtonClicked))
+        setBarButton(type: .text, position: .right, title: Constants.Button.add, image: nil, color: nil, action: #selector(addBarButtonClicked))
         
         addView.tableView.delegate = self
         addView.tableView.dataSource = self
@@ -49,13 +49,10 @@ final class AddViewController: BaseViewController {
     }
     
     @objc private func cancelBarButtonClicked() {
-        print("취소 버튼 클릭")
         dismiss(animated: true)
     }
     
     @objc private func addBarButtonClicked() {
-        print("저장 버튼 클릭")
-        
         let realm = try! Realm()
         
         guard let title = addView.titleField.text, !title.isEmpty, let memo = addView.memoField.text else {
@@ -74,8 +71,7 @@ final class AddViewController: BaseViewController {
         
         try! realm.write {
             realm.add(todo)
-            print("DB 저장 성공!")
-            print("주소 확인", realm.configuration.fileURL)
+            print("DB 저장 성공! (주소 확인)", realm.configuration.fileURL)
         }
         dismiss(animated: true)
     }
@@ -131,20 +127,19 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             let endDateVC = EndDateViewController()
-            endDateVC.sendDate = { date in  // Date
+            endDateVC.sendDate = { date in // Date
                 self.userSelectedData[section] = date ?? Date()
-                print("여기두...", self.userSelectedData)
             }
             navigationController?.pushViewController(endDateVC, animated: true)
         } else if section == 1 {
             let tagVC = TagViewController()
-            tagVC.sendTag = { tag in       // String
+            tagVC.sendTag = { tag in // String
                 self.userSelectedData[section] = tag
             }
             navigationController?.pushViewController(tagVC, animated: true)
         } else if section == 2 {
             let priorityVC = PriorityViewController()
-            priorityVC.sendPriority = { priority in     // Int
+            priorityVC.sendPriority = { priority in // Int
                 self.userSelectedData[section] = priority
             }
             navigationController?.pushViewController(priorityVC, animated: true)
