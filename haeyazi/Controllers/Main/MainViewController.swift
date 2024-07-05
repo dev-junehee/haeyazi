@@ -79,6 +79,7 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getTodoList()
+        getNotification()
     }
     
     override func configureController() {
@@ -91,6 +92,22 @@ class MainViewController: BaseViewController {
     
     private func getTodoList() {
         todoList = repository.getAllTodo()
+    }
+    
+    private func getNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didDismissAddViewNotification(_:)),
+            name: NSNotification.Name(AddViewController.id),
+            object: nil
+        )
+    }
+    
+    // dismiss 알림오면 테이블뷰 리로드
+    @objc private func didDismissAddViewNotification(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.mainView.collectionView.reloadData()
+        }
     }
     
 }

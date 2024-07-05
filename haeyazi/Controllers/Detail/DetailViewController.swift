@@ -59,8 +59,9 @@ final class DetailViewController: BaseViewController {
     @objc private func editButtonClicked() {
         print(self, #function, "수정 버튼 클릭")
         // 바뀐 제목/메모 확인
-        print(detailView.titleField.text)
-        print(detailView.memoField.text)
+        print("바뀐 제목 확인", detailView.titleField.text)
+        print("바뀐 메모 확인", detailView.memoField.text)
+        print("todo확인", todoData)
     }
     
 }
