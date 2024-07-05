@@ -25,6 +25,7 @@ final class PriorityViewController: BaseViewController {
     
     private func setSelectedPriority() {
         let selected = priorityView.priorityControl.selectedSegmentIndex
+        print("우선순위 보내기 전 확인", selected)
         sendPriority?(selected)
     }
     

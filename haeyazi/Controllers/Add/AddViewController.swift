@@ -54,7 +54,7 @@ final class AddViewController: BaseViewController {
     }
     
     @objc private func addBarButtonClicked() {
-        let realm = try! Realm()
+        let repository = TodoTableRepository()
         
         guard let title = addView.titleField.text, !title.isEmpty, let memo = addView.memoField.text else {
             showAlert(style: .oneButton, title: "제목이 비어있어요!", message: "제목을 입력해 주세요.") { return }
@@ -66,13 +66,11 @@ final class AddViewController: BaseViewController {
             memo: memo,
             endDate: userSelectedData[0] as? Date,
             tag: userSelectedData[1] as? String,
-            priority: userSelectedData[2] as? Int
+            priority: userSelectedData[2] as? Int ?? 1
         )
-        
-        try! realm.write {
-            realm.add(todo)
-            print("DB 저장 성공! (주소 확인)", realm.configuration.fileURL)
-        }
+        print("저장 전 저장값 확인", userSelectedData)
+        print("저장 전 확인", todo)
+        repository.createTodo(todo)
         dismiss(animated: true)
     }
 }

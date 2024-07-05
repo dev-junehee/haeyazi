@@ -8,27 +8,29 @@
 import UIKit
 import RealmSwift
 
-final class AllListViewController: BaseViewController {
+final class ListViewController: BaseViewController {
     
-    private let allView = AllListView()
+    private let listView = ListView()
     
     private let realm = try! Realm()
+    private let repository = TodoTableRepository()
     
-    var repository = TodoTableRepository()
+    var listType: MainTodoListType = .all
+    
     var todoList: Results<Todo>? {
         didSet {
-            allView.tableView.reloadData()
+            listView.tableView.reloadData()
         }
     }
     
     override func loadView() {
-        self.view = allView
+        self.view = listView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        todoList = realm.objects(Todo.self)
-        allView.tableView.reloadData()
+        listView.tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -43,10 +45,15 @@ final class AllListViewController: BaseViewController {
         setBarButtons()
         setSortPullDownButton()
     
-        allView.tableView.delegate = self
-        allView.tableView.dataSource = self
-        allView.tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.id)
-        allView.tableView.rowHeight = 80
+        listView.tableView.delegate = self
+        listView.tableView.dataSource = self
+        listView.tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.id)
+        listView.tableView.rowHeight = 80
+    }
+    
+    override func configureUI() {
+        super.configureUI()
+        listView.titleLabel.text = listType.rawValue
     }
     
     @objc private func backBarButtonClicked() {
@@ -56,13 +63,13 @@ final class AllListViewController: BaseViewController {
     // dismiss 알림오면 테이블뷰 리로드
     @objc private func didDismissAddViewNotification(_ notification: Notification) {
         DispatchQueue.main.async {
-            self.allView.tableView.reloadData()
+            self.listView.tableView.reloadData()
         }
     }
 }
 
 
-extension AllListViewController {
+extension ListViewController {
     private func setBarButtons() {
         setBarButton(type: .image, position: .left, title: nil, image: Resources.SystemImage.left, color: nil, action: #selector(backBarButtonClicked))
         setBarButton(type: .image, position: .right, title: nil, image: Resources.SystemImage.sort, color: nil, action: nil)
@@ -100,7 +107,7 @@ extension AllListViewController {
 }
 
 
-extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
+extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoList?.count ?? 0
     }
@@ -142,14 +149,14 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             completionHandler(true)
-            self.allView.tableView.reloadData()
+            self.listView.tableView.reloadData()
         }
         
         let delete = UIContextualAction(style: .destructive, title: Constants.Button.delete ) { _, _, _ in
             try! self.realm.write {
                 self.realm.delete(todo)
             }
-            self.allView.tableView.reloadData()
+            self.listView.tableView.reloadData()
         }
         
         return UISwipeActionsConfiguration(actions: [delete, done])

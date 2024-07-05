@@ -18,6 +18,7 @@ final class TodoTableRepository {
             try realm.write {
                 realm.add(data)
                 print(#function, "할 일 생성 완료")
+                print(realm.configuration.fileURL)
             }
         } catch {
             print(#function, "할 일 생성 실패", error)
@@ -27,6 +28,27 @@ final class TodoTableRepository {
     // read
     func getAllTodo() -> Results<Todo> {
         return realm.objects(Todo.self)
+    }
+    
+    func getTodayTodo(sort: Bool) -> Results<Todo> {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        
+//        let today = formatter.string(from: Date())
+//        
+//        let hasEndDate = realm.objects(Todo.self).filter { todo in
+//            todo.endDate != nil
+//        }
+        
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: today)!
+       
+        if sort {
+            return realm.objects(Todo.self).filter("endDate >= %@ AND endDate < %@", today, tomorrow)
+        } else {
+            return realm.objects(Todo.self).filter("endDate >= %@", tomorrow)
+        }
     }
     
     func getPriorityTodo(priority: Int) -> Results<Todo> {

@@ -14,7 +14,7 @@ import Foundation
  */
 enum Constants {
     enum Title {
-        static let all = "전체"
+        static let all = "목록"
     }
     
     enum Main {
