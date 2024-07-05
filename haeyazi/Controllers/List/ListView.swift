@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class AllListView: BaseView {
+class ListView: BaseView {
     
     let titleLabel = UILabel()
     let tableView = UITableView()
@@ -34,7 +34,6 @@ class AllListView: BaseView {
     }
     
     override func configureViewUI() {
-        titleLabel.text = Constants.Title.all
         titleLabel.font = Resources.Font.title
     
         tableView.backgroundColor = Resources.Color.white

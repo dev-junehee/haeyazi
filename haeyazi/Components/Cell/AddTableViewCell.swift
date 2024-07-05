@@ -63,11 +63,11 @@ class AddTableViewCell: BaseTableViewCell {
     // 마감일
     func configureDateCellData(title: String, data: Date) {
         titleLabel.text = title
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd (EE)"
-        let formattedDate = dateFormatter.string(for: data)
-        dataLabel.text = formattedDate
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy.MM.dd (EE)"
+//        let formattedDate = dateFormatter.string(for: data)
+//        dataLabel.text = formattedDate
+        dataLabel.text = getFormattedDateString(date: data, formatStyle: "yyyy.MM.dd (EE)")
     }
     
     // 태그

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EndDateViewController: BaseViewController {
+final class EndDateViewController: BaseViewController {
   
     let dateView = EndDateView()
     

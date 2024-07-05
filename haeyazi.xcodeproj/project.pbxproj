@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C413D2762C379A9D00676D26 /* TodoTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2752C379A9D00676D26 /* TodoTableRepository.swift */; };
+		C413D2782C37E66100676D26 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2772C37E66100676D26 /* UIView+Extension.swift */; };
 		C468DF942C33E2AE0078004C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DF932C33E2AE0078004C /* AppDelegate.swift */; };
 		C468DF962C33E2AE0078004C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DF952C33E2AE0078004C /* SceneDelegate.swift */; };
 		C468DF9D2C33E2AF0078004C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C468DF9C2C33E2AF0078004C /* Assets.xcassets */; };
 		C468DFA02C33E2AF0078004C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C468DF9F2C33E2AF0078004C /* Base */; };
 		C468DFA82C33E2E00078004C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C468DFA72C33E2E00078004C /* .gitignore */; };
 		C468DFAD2C33E8E20078004C /* ReuseableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFAC2C33E8E20078004C /* ReuseableProtocol.swift */; };
-		C468DFB02C33E9AB0078004C /* AllListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFAF2C33E9AB0078004C /* AllListViewController.swift */; };
+		C468DFB02C33E9AB0078004C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFAF2C33E9AB0078004C /* ListViewController.swift */; };
 		C468DFB42C33EB610078004C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFB32C33EB610078004C /* BaseView.swift */; };
 		C468DFB62C33EB6B0078004C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFB52C33EB6B0078004C /* BaseViewController.swift */; };
-		C468DFB82C33EED70078004C /* AllListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFB72C33EED70078004C /* AllListView.swift */; };
+		C468DFB82C33EED70078004C /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFB72C33EED70078004C /* ListView.swift */; };
 		C468DFBB2C33EF480078004C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C468DFBA2C33EF480078004C /* SnapKit */; };
 		C468DFBE2C33EFFF0078004C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFBD2C33EFFF0078004C /* Constants.swift */; };
 		C468DFC02C33F00D0078004C /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DFBF2C33F00D0078004C /* Resources.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C413D2752C379A9D00676D26 /* TodoTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableRepository.swift; sourceTree = "<group>"; };
+		C413D2772C37E66100676D26 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C468DF902C33E2AE0078004C /* haeyazi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = haeyazi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C468DF932C33E2AE0078004C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C468DF952C33E2AE0078004C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,10 +56,10 @@
 		C468DFA12C33E2AF0078004C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C468DFA72C33E2E00078004C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C468DFAC2C33E8E20078004C /* ReuseableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseableProtocol.swift; sourceTree = "<group>"; };
-		C468DFAF2C33E9AB0078004C /* AllListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListViewController.swift; sourceTree = "<group>"; };
+		C468DFAF2C33E9AB0078004C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		C468DFB32C33EB610078004C /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C468DFB52C33EB6B0078004C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		C468DFB72C33EED70078004C /* AllListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListView.swift; sourceTree = "<group>"; };
+		C468DFB72C33EED70078004C /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		C468DFBD2C33EFFF0078004C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C468DFBF2C33F00D0078004C /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		C468DFC52C33F44C0078004C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -137,25 +141,23 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		C468DFAE2C33E9920078004C /* AllList */ = {
+		C468DFAE2C33E9920078004C /* List */ = {
 			isa = PBXGroup;
 			children = (
-				C468DFAF2C33E9AB0078004C /* AllListViewController.swift */,
-				C468DFB72C33EED70078004C /* AllListView.swift */,
+				C468DFAF2C33E9AB0078004C /* ListViewController.swift */,
+				C468DFB72C33EED70078004C /* ListView.swift */,
 			);
-			path = AllList;
+			path = List;
 			sourceTree = "<group>";
 		};
 		C468DFB12C33EB450078004C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				C468DFEE2C3567670078004C /* Main */,
-				C468DFAE2C33E9920078004C /* AllList */,
+				C468DFAE2C33E9920078004C /* List */,
 				C468DFF72C3598130078004C /* Detail */,
 				C468DFC72C33F7310078004C /* Add */,
-				C468DFDF2C35244A0078004C /* EndDate */,
-				C468DFE52C3524C20078004C /* Priority */,
-				C468DFE22C3524930078004C /* Tag */,
+				C468DFFC2C35B88B0078004C /* Edit */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -185,6 +187,7 @@
 			children = (
 				C468DFC52C33F44C0078004C /* UIViewController+Extension.swift */,
 				C468DFD82C3412870078004C /* UITextField+Extension.swift */,
+				C413D2772C37E66100676D26 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				C468DFDA2C3437500078004C /* TodoModel.swift */,
+				C413D2752C379A9D00676D26 /* TodoTableRepository.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -267,6 +271,16 @@
 				C468DFFA2C3598400078004C /* DetailView.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		C468DFFC2C35B88B0078004C /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				C468DFDF2C35244A0078004C /* EndDate */,
+				C468DFE52C3524C20078004C /* Priority */,
+				C468DFE22C3524930078004C /* Tag */,
+			);
+			path = Edit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,18 +376,20 @@
 				C468DFF62C356CB50078004C /* BaseCollectionViewCell.swift in Sources */,
 				C468DFD92C3412870078004C /* UITextField+Extension.swift in Sources */,
 				C468DFD52C34025E0078004C /* BaseTableViewCell.swift in Sources */,
-				C468DFB02C33E9AB0078004C /* AllListViewController.swift in Sources */,
+				C468DFB02C33E9AB0078004C /* ListViewController.swift in Sources */,
 				C468DFFB2C3598400078004C /* DetailView.swift in Sources */,
 				C468DF962C33E2AE0078004C /* SceneDelegate.swift in Sources */,
 				C468DFF22C35677E0078004C /* MainViewController.swift in Sources */,
 				C468DFE12C3524660078004C /* EndDateViewController.swift in Sources */,
 				C468DFEB2C35425B0078004C /* TagView.swift in Sources */,
-				C468DFB82C33EED70078004C /* AllListView.swift in Sources */,
+				C468DFB82C33EED70078004C /* ListView.swift in Sources */,
 				C468DFE42C3524A30078004C /* TagViewController.swift in Sources */,
 				C468DFD32C34024D0078004C /* TodoTableViewCell.swift in Sources */,
 				C468DFC02C33F00D0078004C /* Resources.swift in Sources */,
 				C468DFCB2C33F74F0078004C /* AddView.swift in Sources */,
 				C468DFC62C33F44C0078004C /* UIViewController+Extension.swift in Sources */,
+				C413D2782C37E66100676D26 /* UIView+Extension.swift in Sources */,
+				C413D2762C379A9D00676D26 /* TodoTableRepository.swift in Sources */,
 				C468DFB62C33EB6B0078004C /* BaseViewController.swift in Sources */,
 				C468DFBE2C33EFFF0078004C /* Constants.swift in Sources */,
 				C468DFF92C35982E0078004C /* DetailViewController.swift in Sources */,
