@@ -61,10 +61,16 @@ final class MainViewController: BaseViewController {
         self.view = mainView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getNotification()
+        mainView.collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getTodoList()
-        getNotification()
+//        getNotification()
     }
     
     override func configureController() {

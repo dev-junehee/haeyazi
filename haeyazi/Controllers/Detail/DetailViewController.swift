@@ -14,25 +14,43 @@ final class DetailViewController: BaseViewController {
     
     let realm = try! Realm()
     
-    var todoData: Todo? {
+    // 기존 데이터
+    var todoData: Todo?
+    
+    // 바뀔 데이터
+    var isUpdated = false
+    var updateTodoData: [String: Any] = [
+        "endDate": "",
+        "tag": "",
+        "priority": ""
+    ] {
         didSet {
+            print("투두 바뀜")
             detailView.tableView.reloadData()
         }
     }
     
-    var sendNewData: ((String?) -> Void)?
+    var sendNewData: ((Todo?) -> Void)?
     
     override func loadView() {
         self.view = detailView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print(#function)
+        configureUpdateTodoData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        print(#function)
         detailView.tableView.reloadData()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(#function)
     }
     
     override func configureController() {
@@ -45,9 +63,6 @@ final class DetailViewController: BaseViewController {
         detailView.tableView.register(AddTableViewCell.self, forCellReuseIdentifier: AddTableViewCell.id)
         detailView.tableView.rowHeight = 50
         detailView.tableView.separatorStyle = .none
-        
-        detailView.titleField.delegate = self
-        detailView.memoField.delegate = self
     }
     
     override func configureUI() {
@@ -56,12 +71,10 @@ final class DetailViewController: BaseViewController {
         detailView.memoField.text = todoData?.memo
     }
     
-    @objc private func editButtonClicked() {
-        print(self, #function, "수정 버튼 클릭")
-        // 바뀐 제목/메모 확인
-        print("바뀐 제목 확인", detailView.titleField.text)
-        print("바뀐 메모 확인", detailView.memoField.text)
-        print("todo확인", todoData)
+    private func configureUpdateTodoData() {
+        updateTodoData["endDate"] = todoData?.endDate
+        updateTodoData["tag"] = todoData?.tag
+        updateTodoData["priority"] = todoData?.priority
     }
     
 }
@@ -76,15 +89,38 @@ extension DetailViewController {
             for: .normal
         )
     }
-}
-
-extension DetailViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("텍스트필드 수정 시작!")
-    }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("텍스트필드 수정 끝!")
+    @objc private func editButtonClicked() {
+        print("바뀐 제목 확인", detailView.titleField.text)
+        print("바뀐 메모 확인", detailView.memoField.text)
+        print("todo확인", todoData)
+        
+        guard let title = detailView.titleField.text else {
+            showAlert(style: .oneButton, title: "제목 입력해주세요", message: nil) { return }
+            return
+        }
+        
+        if isUpdated {
+            try! realm.write {
+                todoData?.title = title
+                todoData?.memo = detailView.memoField.text
+                todoData?.endDate = updateTodoData["endDate"] as? Date ?? nil
+                todoData?.tag = updateTodoData["tag"] as? String ?? nil
+                todoData?.priority = updateTodoData["priority"] as? Int ?? 1
+            }
+//            sendNewData?(todoData)
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name(DetailViewController.id),
+                object: nil,
+                userInfo: nil
+            )
+            
+        } else {
+            configureUpdateTodoData()
+        }
+        
+        dismiss(animated: true)
     }
 }
 
@@ -105,15 +141,15 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             // 마감일
-            let endDate = todoData?.endDate ?? Date()
+            let endDate = updateTodoData["endDate"] as? Date ?? Date()
             cell.configureDateCellData(title: title, data: endDate)
         } else if section == 1 {
             // 태그
-            let tag = todoData?.tag ?? ""
+            let tag = updateTodoData["tag"] as? String ?? ""
             cell.configureTagCellData(title: title, tag: tag)
         } else if section == 2 {
             // 우선순위 높 보통 낮
-            let priority = todoData?.priority ?? 1
+            let priority = updateTodoData["priority"] as? Int ?? 1
             cell.configurePriorityCellData(title: title, data: priority)
         } else {
             cell.configureCellData(title: title, data: "")
@@ -136,25 +172,33 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             let endDateVC = EndDateViewController()
             endDateVC.sendDate = { date in // Date
-                try! self.realm.write {
-                    self.todoData?.endDate = date ?? Date()
+                if date != self.todoData?.endDate {
+                    self.isUpdated = true
+                }
+                if self.isUpdated {
+                    self.updateTodoData["endDate"] = date
                 }
             }
             navigationController?.pushViewController(endDateVC, animated: true)
         } else if section == 1 {
             let tagVC = TagViewController()
             tagVC.sendTag = { tag in
-                try! self.realm.write {
-                    self.todoData?.tag = tag // String
-
+                if tag != self.todoData?.tag {
+                    self.isUpdated = true
+                }
+                if self.isUpdated {
+                    self.updateTodoData["tag"] = tag
                 }
             }
             navigationController?.pushViewController(tagVC, animated: true)
         } else if section == 2 {
             let priorityVC = PriorityViewController()
             priorityVC.sendPriority = { priority in // Int
-                try! self.realm.write {
-                    self.todoData?.priority = priority
+                if priority != self.todoData?.priority {
+                    self.isUpdated = true
+                }
+                if self.isUpdated {
+                    self.updateTodoData["priority"] = priority
                 }
             }
             navigationController?.pushViewController(priorityVC, animated: true)

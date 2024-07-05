@@ -70,10 +70,10 @@ class TodoTableViewCell: BaseTableViewCell {
         memoLabel.text = data.memo
         
         guard let endDate = data.endDate else {
-            dateLabel.text = ""
+            dateLabel.text = "-"
             return
         }
-        dateLabel.text = getFormattedDateString(date: endDate, formatStyle: "yyyy.MM.dd (EE) hh:mm")
+        dateLabel.text = getFormattedDateString(date: endDate, formatStyle: "yyyy.MM.dd (EE)")
         
     }
     

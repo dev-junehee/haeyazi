@@ -29,7 +29,6 @@ final class ListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        todoList = realm.objects(Todo.self)
         listView.tableView.reloadData()
     }
     
@@ -60,12 +59,6 @@ final class ListViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    // dismiss 알림오면 테이블뷰 리로드
-    @objc private func didDismissAddViewNotification(_ notification: Notification) {
-        DispatchQueue.main.async {
-            self.listView.tableView.reloadData()
-        }
-    }
 }
 
 
@@ -80,15 +73,12 @@ extension ListViewController {
         guard let todoList = todoList else { return }
         
         let sortedTitle = UIAction(title: Constants.AllList.Sort.title, image: Resources.SystemImage.text) { _ in
-//            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "title", ascending: true)
             self.todoList = self.repository.getSortedTodo(target: todoList, key: "title", ascending: true)
         }
         let sortedDate = UIAction(title: Constants.AllList.Sort.date, image: Resources.SystemImage.calendar) { _ in
-//            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "endDate", ascending: true)
             self.todoList = self.repository.getSortedTodo(target: todoList, key: "endDate", ascending: true)
         }
         let sortedPriority = UIAction(title: Constants.AllList.Sort.priority, image: Resources.SystemImage.priority) { _ in
-//            self.showAlert(style: .oneButton, title: "준비 중인 기능이에요!", message: nil) { return }
             self.todoList = self.repository.getSortedTodo(target: todoList, key: "priority", ascending: true)
         }
         
@@ -99,11 +89,25 @@ extension ListViewController {
     private func getNotification() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.didDismissAddViewNotification(_:)),
+            selector: #selector(self.didDismissViewNotification(_:)),
             name: NSNotification.Name(AddViewController.id),
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didDismissViewNotification(_:)),
+            name: NSNotification.Name(DetailViewController.id),
+            object: nil
+        )
     }
+    
+    // dismiss 알림오면 테이블뷰 리로드
+    @objc private func didDismissViewNotification(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.listView.tableView.reloadData()
+        }
+    }
+    
 }
 
 

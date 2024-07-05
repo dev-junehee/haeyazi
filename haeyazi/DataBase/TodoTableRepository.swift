@@ -31,15 +31,6 @@ final class TodoTableRepository {
     }
     
     func getTodayTodo(sort: Bool) -> Results<Todo> {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        
-//        let today = formatter.string(from: Date())
-//        
-//        let hasEndDate = realm.objects(Todo.self).filter { todo in
-//            todo.endDate != nil
-//        }
-        
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
         let tomorrow = calendar.date(byAdding: .day, value: 1, to: today)!
