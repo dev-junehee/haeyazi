@@ -44,28 +44,13 @@ enum MainTodoListType: String, CaseIterable {
             return Resources.SystemImage.checkmark
         }
     }
-    
-    var list: Results<Todo> {
-        switch self {
-        case .today:
-            return MainViewController().repository.getTodayTodo(sort: true)
-        case .plan:
-            return MainViewController().repository.getTodayTodo(sort: false)
-        case .all:
-            return MainViewController().repository.getAllTodo()
-        case .priority:
-            return MainViewController().repository.getPriorityTodo(priority: 0)
-        case .complete:
-            return MainViewController().repository.getCompleteTodo(status: true)
-        }
-    }
 }
 
-class MainViewController: BaseViewController {
+final class MainViewController: BaseViewController {
     
     private let mainView = MainView()
     
-    let repository = TodoTableRepository()
+    private let repository = TodoTableRepository()
     var todoList: Results<Todo>? {
         didSet {
             mainView.collectionView.reloadData()
@@ -144,12 +129,28 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.id, for: indexPath) as? MainCollectionViewCell else { return MainCollectionViewCell() }
 
         let item = indexPath.item
-
+        
+        let type = MainTodoListType.allCases[item]
+        var count = 0
+        
+        switch type {
+        case .today:
+            count = self.repository.getTodayTodo(sort: true).count
+        case .plan:
+            count = self.repository.getTodayTodo(sort: false).count
+        case .all:
+            count = self.repository.getAllTodo().count
+        case .priority:
+            count = self.repository.getPriorityTodo(priority: 0).count
+        case .complete:
+            count = self.repository.getCompleteTodo(status: true).count
+        }
+        
         cell.configureCellData(
             title: MainTodoListType.allCases[item].rawValue,
             image: MainTodoListType.allCases[item].icon,
             color: MainTodoListType.allCases[item].color,
-            count: MainTodoListType.allCases[item].list.count
+            count: count
         )
         
         return cell
@@ -157,9 +158,23 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = indexPath.item
+        let type = MainTodoListType.allCases[item]
         
         let listVC = ListViewController()
-        listVC.todoList = MainTodoListType.allCases[item].list
+        
+        switch type {
+        case .today:
+            listVC.todoList = self.repository.getTodayTodo(sort: true)
+        case .plan:
+            listVC.todoList = self.repository.getTodayTodo(sort: false)
+        case .all:
+            listVC.todoList = self.repository.getAllTodo()
+        case .priority:
+            listVC.todoList = self.repository.getPriorityTodo(priority: 0)
+        case .complete:
+            listVC.todoList = self.repository.getCompleteTodo(status: true)
+        }
+        
         listVC.listType = MainTodoListType.allCases[item]
         navigationController?.pushViewController(listVC, animated: true)
     }

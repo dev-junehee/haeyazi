@@ -73,5 +73,5 @@ class MainCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = title
         countLabel.text = "\(count)"
     }
-    
+
 }
