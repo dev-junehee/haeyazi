@@ -75,6 +75,11 @@ class TodoTableViewCell: BaseTableViewCell {
         }
         dateLabel.text = getFormattedDateString(date: endDate, formatStyle: "yyyy.MM.dd (EE)")
         
+        if data.isDone {
+            checkButton.setImage(Resources.SystemImage.check, for: .normal)
+        } else {
+            checkButton.setImage(Resources.SystemImage.uncheck, for: .normal)
+        }
     }
     
     func updateDoneButtonUI(isDone: Bool) {
