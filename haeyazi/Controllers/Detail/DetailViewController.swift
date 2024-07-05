@@ -30,8 +30,6 @@ final class DetailViewController: BaseViewController {
         }
     }
     
-    var sendNewData: ((Todo?) -> Void)?
-    
     override func loadView() {
         self.view = detailView
     }
@@ -82,7 +80,7 @@ final class DetailViewController: BaseViewController {
 
 extension DetailViewController {
     private func setEditBarButton() {
-        setBarButton(type: .text, position: .right, title: Constants.Button.edit, image: nil, color: Resources.Color.gray, action: #selector(editButtonClicked))
+        setBarButton(type: .text, position: .right, title: Constants.Button.edit, image: nil, color: nil, action: #selector(editButtonClicked))
         let button = navigationItem.rightBarButtonItem
         button?.setTitleTextAttributes(
             [.font: Resources.Font.bold18],
@@ -91,12 +89,8 @@ extension DetailViewController {
     }
     
     @objc private func editButtonClicked() {
-        print("바뀐 제목 확인", detailView.titleField.text)
-        print("바뀐 메모 확인", detailView.memoField.text)
-        print("todo확인", todoData)
-        
         guard let title = detailView.titleField.text else {
-            showAlert(style: .oneButton, title: "제목 입력해주세요", message: nil) { return }
+            showAlert(style: .oneButton, title: "제목을 입력해 주세요!", message: nil) { return }
             return
         }
         
@@ -108,14 +102,11 @@ extension DetailViewController {
                 todoData?.tag = updateTodoData["tag"] as? String ?? nil
                 todoData?.priority = updateTodoData["priority"] as? Int ?? 1
             }
-//            sendNewData?(todoData)
-            
             NotificationCenter.default.post(
                 name: NSNotification.Name(DetailViewController.id),
                 object: nil,
                 userInfo: nil
             )
-            
         } else {
             configureUpdateTodoData()
         }
