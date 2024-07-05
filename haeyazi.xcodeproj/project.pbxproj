@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C413D2762C379A9D00676D26 /* TodoTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2752C379A9D00676D26 /* TodoTableRepository.swift */; };
 		C468DF942C33E2AE0078004C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DF932C33E2AE0078004C /* AppDelegate.swift */; };
 		C468DF962C33E2AE0078004C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468DF952C33E2AE0078004C /* SceneDelegate.swift */; };
 		C468DF9D2C33E2AF0078004C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C468DF9C2C33E2AF0078004C /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C413D2752C379A9D00676D26 /* TodoTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableRepository.swift; sourceTree = "<group>"; };
 		C468DF902C33E2AE0078004C /* haeyazi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = haeyazi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C468DF932C33E2AE0078004C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C468DF952C33E2AE0078004C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				C468DFDA2C3437500078004C /* TodoModel.swift */,
+				C413D2752C379A9D00676D26 /* TodoTableRepository.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				C468DFC02C33F00D0078004C /* Resources.swift in Sources */,
 				C468DFCB2C33F74F0078004C /* AddView.swift in Sources */,
 				C468DFC62C33F44C0078004C /* UIViewController+Extension.swift in Sources */,
+				C413D2762C379A9D00676D26 /* TodoTableRepository.swift in Sources */,
 				C468DFB62C33EB6B0078004C /* BaseViewController.swift in Sources */,
 				C468DFBE2C33EFFF0078004C /* Constants.swift in Sources */,
 				C468DFF92C35982E0078004C /* DetailViewController.swift in Sources */,

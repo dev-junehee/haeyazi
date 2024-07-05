@@ -54,9 +54,13 @@ enum Constants {
         static let edit = "수정"
         static let okay = "확인"
         static let cancel = "취소"
-        static let complete = "완료"
         static let new = "새로운 할 일"
         static let list = "목록 추가"
+        static let all = "전체"
+        static let today = "오늘"
+        static let plan = "예정"
+        static let flag = "깃발 표시"
+        static let complete = "완료"
         static let incomplete = "미완료"
     }
     

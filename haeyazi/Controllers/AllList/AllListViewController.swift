@@ -13,7 +13,9 @@ final class AllListViewController: BaseViewController {
     private let allView = AllListView()
     
     private let realm = try! Realm()
-    private var todoList: Results<Todo>! {
+    
+    var repository = TodoTableRepository()
+    var todoList: Results<Todo>? {
         didSet {
             allView.tableView.reloadData()
         }
@@ -25,14 +27,15 @@ final class AllListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        todoList = realm.objects(Todo.self)
+//        todoList = realm.objects(Todo.self)
         allView.tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(self, #function, "스키마 버전 확인", realm.configuration.schemaVersion)
+        // 스키마 버전 확인
+        repository.getSchemaVersion()
         getNotification()
     }
     
@@ -67,15 +70,19 @@ extension AllListViewController {
     
     private func setSortPullDownButton() {
         guard let sortButton = navigationItem.rightBarButtonItem else { return }
+        guard let todoList = todoList else { return }
         
         let sortedTitle = UIAction(title: Constants.AllList.Sort.title, image: Resources.SystemImage.text) { _ in
-            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "title", ascending: true)
+//            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "title", ascending: true)
+            self.todoList = self.repository.getSortedTodo(target: todoList, key: "title", ascending: true)
         }
         let sortedDate = UIAction(title: Constants.AllList.Sort.date, image: Resources.SystemImage.calendar) { _ in
-            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "regDate", ascending: true)
+//            self.todoList = self.realm.objects(Todo.self).sorted(byKeyPath: "endDate", ascending: true)
+            self.todoList = self.repository.getSortedTodo(target: todoList, key: "endDate", ascending: true)
         }
         let sortedPriority = UIAction(title: Constants.AllList.Sort.priority, image: Resources.SystemImage.priority) { _ in
-            self.showAlert(style: .oneButton, title: "준비 중인 기능이에요!", message: nil) { return }
+//            self.showAlert(style: .oneButton, title: "준비 중인 기능이에요!", message: nil) { return }
+            self.todoList = self.repository.getSortedTodo(target: todoList, key: "priority", ascending: true)
         }
         
         sortButton.menu = UIMenu(image: nil, identifier:  nil, options: .displayInline, children: [sortedTitle,sortedDate, sortedPriority])
@@ -95,20 +102,23 @@ extension AllListViewController {
 
 extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todoList.count
+        return todoList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.id, for: indexPath) as? TodoTableViewCell else { return TodoTableViewCell() }
 
-        let todo = todoList[indexPath.row]
-        cell.configureCellData(data: todo)
+        if let todoList = todoList {
+            let todo = todoList[indexPath.row]
+            cell.configureCellData(data: todo)
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let todo = todoList[indexPath.row]
+        
+        let todo = todoList?[indexPath.row]
         let detailVC = DetailViewController()
         detailVC.todoData = todo
         detailVC.sendNewData = { data in
@@ -118,6 +128,10 @@ extension AllListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let todoList = todoList else {
+            return UISwipeActionsConfiguration(actions: [])
+        }
+        
         let todo = todoList[indexPath.row]
         
         let done = UIContextualAction(style: .normal, title: todo.isDone ? Constants.Button.incomplete : Constants.Button.complete) { _, _, completionHandler in

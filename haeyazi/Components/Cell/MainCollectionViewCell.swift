@@ -21,13 +21,6 @@ class MainCollectionViewCell: BaseCollectionViewCell {
         iconView.layer.cornerRadius = iconView.frame.width / 2
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        iconView.layoutIfNeeded()
-//        iconView.clipsToBounds = true
-//        iconView.layer.cornerRadius = iconView.frame.width / 2
-//    }
-    
     override func configureCellHierarchy() {
         let iconTitle = [iconView, titleLabel]
         iconTitle.forEach {

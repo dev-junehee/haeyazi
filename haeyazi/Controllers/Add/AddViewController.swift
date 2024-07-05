@@ -64,7 +64,6 @@ final class AddViewController: BaseViewController {
         let todo = Todo(
             title: title,
             memo: memo,
-            regDate: Date(),
             endDate: userSelectedData[0] as? Date,
             tag: userSelectedData[1] as? String,
             priority: userSelectedData[2] as? Int

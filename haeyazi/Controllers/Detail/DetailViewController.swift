@@ -6,17 +6,19 @@
 //
 
 import UIKit
+import RealmSwift
 
-class DetailViewController: BaseViewController {
+final class DetailViewController: BaseViewController {
     
     let detailView = DetailView()
     
-    var todoData: Todo?
-//    var updateTodoData: Todo? {
-//        didSet {
-//            detailView.tableView.reloadData()
-//        }
-//    }
+    let realm = try! Realm()
+    
+    var todoData: Todo? {
+        didSet {
+            detailView.tableView.reloadData()
+        }
+    }
     
     var sendNewData: ((String?) -> Void)?
     
@@ -24,9 +26,13 @@ class DetailViewController: BaseViewController {
         self.view = detailView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        detailView.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        updateTodoData = todoData
     }
     
     override func configureController() {
@@ -74,8 +80,6 @@ extension DetailViewController {
 extension DetailViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("텍스트필드 수정 시작!")
-        let button = navigationItem.rightBarButtonItem
-        button?.tintColor = Resources.Color.primary
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -131,19 +135,26 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             let endDateVC = EndDateViewController()
             endDateVC.sendDate = { date in // Date
-                self.todoData?.endDate = date ?? Date()
+                try! self.realm.write {
+                    self.todoData?.endDate = date ?? Date()
+                }
             }
             navigationController?.pushViewController(endDateVC, animated: true)
         } else if section == 1 {
             let tagVC = TagViewController()
-            tagVC.sendTag = { tag in // String
-                self.todoData?.tag = tag
+            tagVC.sendTag = { tag in
+                try! self.realm.write {
+                    self.todoData?.tag = tag // String
+
+                }
             }
             navigationController?.pushViewController(tagVC, animated: true)
         } else if section == 2 {
             let priorityVC = PriorityViewController()
             priorityVC.sendPriority = { priority in // Int
-                self.todoData?.priority = priority
+                try! self.realm.write {
+                    self.todoData?.priority = priority
+                }
             }
             navigationController?.pushViewController(priorityVC, animated: true)
         } else {

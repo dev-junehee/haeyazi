@@ -18,11 +18,11 @@ class Todo: Object {
     @Persisted var priority: Int?       // 우선순위 (필수*)
     @Persisted var isDone: Bool         // 완료 여부 (필수*)
     
-    convenience init(title: String, memo: String? = nil, regDate: Date, endDate: Date? = nil, tag: String? = nil, priority: Int? = 1) {
+    convenience init(title: String, memo: String? = nil, endDate: Date? = nil, tag: String? = nil, priority: Int? = 1) {
         self.init()
         self.title = title
         self.memo = memo
-        self.regDate = regDate
+        self.regDate = Date()
         self.endDate = endDate
         self.tag = tag
         self.priority = priority
